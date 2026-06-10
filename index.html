@@ -1,226 +1,661 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Directory — Trouvez l'IA qu'il vous faut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-sans)}
-.header{padding:2rem 0 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.5rem}
-.header h1{font-size:22px;font-weight:500;color:var(--color-text-primary)}
-.header p{font-size:14px;color:var(--color-text-secondary);margin-top:4px}
-.controls{display:flex;gap:10px;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
-.controls input{flex:1;min-width:180px;height:36px;padding:0 12px;font-size:14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)}
-.controls input:focus{outline:none;border-color:var(--color-border-primary)}
-.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
-.tag{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .15s}
-.tag.active{background:#E6F1FB;color:#185FA5;border-color:#85B7EB}
-.tag:hover:not(.active){background:var(--color-background-secondary)}
-.type-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
-.type-tag{font-size:12px;padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .15s}
-.type-tag.active{background:#E1F5EE;color:#0F6E56;border-color:#5DCAA5}
-.type-tag:hover:not(.active){background:var(--color-background-secondary)}
-.section-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:6px;font-weight:500;letter-spacing:.04em}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;cursor:pointer;transition:border-color .15s}
-.card:hover{border-color:var(--color-border-primary)}
-.card.selected{border:2px solid #185FA5}
-.card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.card-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.card-name{font-size:14px;font-weight:500;color:var(--color-text-primary)}
-.card-domain{font-size:11px;color:var(--color-text-secondary)}
-.card-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:10px}
-.card-tags{display:flex;gap:4px;flex-wrap:wrap}
-.badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500}
-.badge-blue{background:#E6F1FB;color:#185FA5}
-.badge-teal{background:#E1F5EE;color:#0F6E56}
-.badge-amber{background:#FAEEDA;color:#854F0B}
-.badge-purple{background:#EEEDFE;color:#534AB7}
-.badge-coral{background:#FAECE7;color:#993C1D}
-.compare-bar{position:sticky;bottom:0;background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary);padding:12px 0;display:flex;align-items:center;gap:12px;margin-top:1.5rem}
-.compare-bar button{height:36px;padding:0 20px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;font-size:13px}
-.compare-bar button.primary{background:#185FA5;color:#fff;border-color:#185FA5}
-.compare-bar button:hover{background:var(--color-background-secondary)}
-.compare-bar button.primary:hover{background:#0C447C}
-.compare-count{font-size:13px;color:var(--color-text-secondary);flex:1}
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:100;align-items:center;justify-content:center}
-.modal-bg.open{display:flex}
-.modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);padding:1.5rem;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
-.modal h2{font-size:18px;font-weight:500;margin-bottom:4px}
-.modal-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem}
-.modal-close{float:right;background:none;border:none;cursor:pointer;font-size:20px;color:var(--color-text-secondary);margin-top:-4px}
-.detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:13px}
-.detail-row:last-child{border-bottom:none}
-.detail-label{color:var(--color-text-secondary)}
-.detail-val{color:var(--color-text-primary);font-weight:500;text-align:right}
-.compare-table{width:100%;border-collapse:collapse;font-size:13px}
-.compare-table th{text-align:left;padding:8px 12px;background:var(--color-background-secondary);font-weight:500;font-size:12px;color:var(--color-text-secondary)}
-.compare-table td{padding:8px 12px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
-.no-results{text-align:center;padding:3rem 0;color:var(--color-text-secondary);font-size:14px}
-.empty-icon{font-size:32px;margin-bottom:8px}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f0f11;
+    --surface: #18181c;
+    --surface2: #222228;
+    --border: #2e2e36;
+    --text: #f0f0f4;
+    --muted: #8a8a9a;
+    --accent: #7c6ff7;
+    --accent-light: #a09af9;
+    --accent-bg: rgba(124,111,247,0.12);
+    --green: #3ecf8e;
+    --green-bg: rgba(62,207,142,0.1);
+    --amber: #f59e0b;
+    --amber-bg: rgba(245,158,11,0.1);
+    --coral: #f97066;
+    --coral-bg: rgba(249,112,102,0.1);
+    --blue: #38bdf8;
+    --blue-bg: rgba(56,189,248,0.1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    background: rgba(15,15,17,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 50;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    color: var(--text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); display: inline-block; }
+  .header-right { font-size: 13px; color: var(--muted); }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 3rem;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    background: var(--accent-bg);
+    border: 1px solid rgba(124,111,247,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+  .hero h1 span { color: var(--accent-light); }
+  .hero p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+  }
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* SEARCH & CONTROLS */
+  .controls-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 2rem;
+  }
+  .search-bar {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .search-bar svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+  }
+  .search-bar input {
+    width: 100%;
+    height: 50px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0 16px 0 46px;
+    font-size: 15px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    transition: border-color .2s;
+    outline: none;
+  }
+  .search-bar input::placeholder { color: var(--muted); }
+  .search-bar input:focus { border-color: var(--accent); }
+
+  .filters-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .filter-group { flex: 1; min-width: 220px; }
+  .filter-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .filter-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-size: 12px;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--muted);
+    transition: all .15s;
+    white-space: nowrap;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--accent-light); }
+  .tag.active { background: var(--accent-bg); color: var(--accent-light); border-color: rgba(124,111,247,0.4); }
+
+  .sort-select {
+    height: 36px;
+    padding: 0 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    outline: none;
+    align-self: flex-end;
+    margin-bottom: 2px;
+  }
+
+  /* GRID */
+  .grid-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+  }
+  .results-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 14px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: border-color .2s, transform .15s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover { border-color: rgba(124,111,247,0.4); transform: translateY(-2px); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+
+  .card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .card-icon {
+    width: 42px; height: 42px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .card-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .card-domain { font-size: 12px; color: var(--muted); margin-top: 1px; }
+  .card-desc { font-size: 13px; color: var(--muted); line-height: 1.55; flex: 1; margin-bottom: 12px; }
+  .card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+  .badge {
+    font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 6px;
+    border: 1px solid transparent;
+  }
+  .badge-purple { background: var(--accent-bg); color: var(--accent-light); border-color: rgba(124,111,247,0.2); }
+  .badge-green { background: var(--green-bg); color: var(--green); border-color: rgba(62,207,142,0.2); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); border-color: rgba(245,158,11,0.2); }
+  .badge-coral { background: var(--coral-bg); color: var(--coral); border-color: rgba(249,112,102,0.2); }
+  .badge-blue { background: var(--blue-bg); color: var(--blue); border-color: rgba(56,189,248,0.2); }
+  .badge-gray { background: rgba(138,138,154,0.1); color: var(--muted); border-color: var(--border); }
+
+  .card-footer { display: flex; gap: 6px; margin-top: auto; }
+  .btn-detail {
+    flex: 1; height: 32px; font-size: 12px; font-family: 'Inter', sans-serif;
+    border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    cursor: pointer; transition: all .15s;
+  }
+  .btn-detail:hover { border-color: var(--accent); color: var(--accent-light); background: var(--accent-bg); }
+  .btn-compare {
+    width: 32px; height: 32px; font-size: 16px;
+    border-radius: 8px; border: 1px solid var(--border);
+    background: transparent; color: var(--muted);
+    cursor: pointer; transition: all .15s;
+  }
+  .btn-compare:hover { border-color: var(--accent); color: var(--accent-light); }
+  .btn-compare.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent-light); }
+
+  .card-rating {
+    position: absolute; top: 12px; right: 12px;
+    font-size: 11px; font-weight: 600;
+    color: var(--amber); background: var(--amber-bg);
+    border: 1px solid rgba(245,158,11,0.2);
+    padding: 2px 7px; border-radius: 6px;
+  }
+
+  /* COMPARE BAR */
+  .compare-sticky {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(24,24,28,0.97);
+    border-top: 1px solid var(--border);
+    padding: 14px 2rem;
+    display: none;
+    align-items: center;
+    gap: 14px;
+    z-index: 40;
+    backdrop-filter: blur(8px);
+  }
+  .compare-sticky.show { display: flex; }
+  .compare-chips { display: flex; gap: 8px; flex: 1; flex-wrap: wrap; }
+  .chip {
+    font-size: 12px; padding: 4px 10px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .chip button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 14px; line-height: 1; }
+  .compare-sticky .btn-primary {
+    height: 38px; padding: 0 20px;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 9px;
+    font-size: 13px; font-weight: 500;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+    transition: background .15s; white-space: nowrap;
+  }
+  .compare-sticky .btn-primary:hover { background: var(--accent-light); color: var(--bg); }
+  .compare-sticky .btn-clear {
+    height: 38px; padding: 0 14px;
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 9px;
+    font-size: 13px; font-family: 'Inter', sans-serif; cursor: pointer;
+  }
+
+  /* MODAL */
+  .overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.65); z-index: 100;
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 540px;
+    max-height: 88vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; width: 32px; height: 32px;
+    font-size: 18px; cursor: pointer; color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-head { display: flex; align-items: center; gap: 14px; margin-bottom: 1rem; }
+  .modal-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+  .modal-name { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; }
+  .modal-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .modal-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+  .detail-box { background: var(--surface2); border-radius: 10px; padding: 12px; }
+  .detail-box-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .detail-box-val { font-size: 14px; font-weight: 500; color: var(--text); }
+  .modal-actions { display: flex; gap: 8px; }
+  .btn-visit {
+    flex: 1; height: 42px;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: 10px;
+    font-size: 14px; font-weight: 500;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+    text-decoration: none; display: flex; align-items: center; justify-content: center;
+    transition: background .15s;
+  }
+  .btn-visit:hover { background: var(--accent-light); color: var(--bg); }
+  .btn-add-compare {
+    height: 42px; padding: 0 16px;
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14px; font-family: 'Inter', sans-serif; cursor: pointer;
+    transition: all .15s;
+  }
+  .btn-add-compare:hover { border-color: var(--accent); color: var(--accent-light); }
+
+  /* COMPARE TABLE */
+  .compare-modal { max-width: 760px; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 1rem; }
+  .compare-table th {
+    text-align: left; padding: 10px 14px;
+    background: var(--surface2); color: var(--muted);
+    font-size: 12px; font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  .compare-table th:first-child { border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; }
+  .compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { color: var(--muted); font-size: 12px; font-weight: 500; white-space: nowrap; }
+
+  /* NO RESULTS */
+  .no-results { grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--muted); }
+  .no-results-icon { font-size: 40px; margin-bottom: 12px; }
+  .no-results h3 { font-size: 16px; color: var(--text); margin-bottom: 6px; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 3rem 1rem 2rem; }
+    .controls-wrap, .grid-wrap { padding-left: 1rem; padding-right: 1rem; }
+    header { padding: 0 1rem; }
+    .stats-row { gap: 1.5rem; }
+  }
 </style>
+</head>
+<body>
 
-<h2 class="sr-only">Répertoire des intelligences artificielles par domaine et usage</h2>
+<header>
+  <a href="#" class="logo"><span class="logo-dot"></span>AI Directory</a>
+  <span class="header-right">+ de 40 outils référencés</span>
+</header>
 
-<div class="header">
-  <h1><i class="ti ti-brain" aria-hidden="true" style="font-size:20px;vertical-align:-2px;margin-right:8px"></i>AI Directory</h1>
-  <p>Trouvez l'IA adaptée à vos besoins parmi plus de 20 outils sélectionnés</p>
+<section class="hero">
+  <span class="hero-eyebrow">Répertoire professionnel</span>
+  <h1>Trouvez l'IA <span>parfaite</span><br>pour votre métier</h1>
+  <p>Comparez, filtrez et découvrez les meilleurs outils d'intelligence artificielle classés par domaine et usage.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num" id="stat-total">40+</div><div class="stat-label">Outils référencés</div></div>
+    <div class="stat"><div class="stat-num">9</div><div class="stat-label">Domaines couverts</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Types d'usage</div></div>
+  </div>
+</section>
+
+<div class="controls-wrap">
+  <div class="search-bar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="search" placeholder="Rechercher une IA, un usage, un domaine…" oninput="render()">
+  </div>
+  <div class="filters-row">
+    <div class="filter-group">
+      <div class="filter-label">Domaine</div>
+      <div class="filter-tags" id="domains"></div>
+    </div>
+    <div class="filter-group">
+      <div class="filter-label">Type d'usage</div>
+      <div class="filter-tags" id="types"></div>
+    </div>
+    <div>
+      <div class="filter-label">Trier</div>
+      <select class="sort-select" id="sort" onchange="render()">
+        <option value="">Popularité</option>
+        <option value="name">Nom A–Z</option>
+        <option value="rating">Meilleure note</option>
+        <option value="free">Gratuit d'abord</option>
+      </select>
+    </div>
+  </div>
 </div>
 
-<div class="controls">
-  <input type="text" id="search" placeholder="🔍  Rechercher une IA..." oninput="render()">
-  <select id="sort" onchange="render()" style="height:36px;padding:0 10px;font-size:13px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary)">
-    <option value="">Trier par : popularité</option>
-    <option value="name">Nom A–Z</option>
-    <option value="free">Gratuit en premier</option>
-  </select>
+<div class="grid-wrap">
+  <div class="results-bar">
+    <span id="results-count"></span>
+    <span id="compare-hint" style="display:none;color:#7c6ff7;font-size:12px">Sélectionnez jusqu'à 4 IAs pour les comparer</span>
+  </div>
+  <div class="grid" id="grid"></div>
 </div>
 
-<div class="section-label">DOMAINE</div>
-<div class="filter-bar" id="domains"></div>
-<div class="section-label">TYPE D'USAGE</div>
-<div class="type-bar" id="types"></div>
-
-<div class="grid" id="grid"></div>
-
-<div class="compare-bar" id="cbar" style="display:none">
-  <span class="compare-count" id="ccount"></span>
-  <button onclick="clearCompare()">Effacer</button>
-  <button class="primary" onclick="openCompare()">Comparer ↗</button>
+<div class="compare-sticky" id="compare-bar">
+  <div class="compare-chips" id="compare-chips"></div>
+  <button class="btn-clear" onclick="clearCompare()">Effacer</button>
+  <button class="btn-primary" onclick="openCompare()">Comparer ↗</button>
 </div>
 
-<div class="modal-bg" id="modal" onclick="closeModal(event)">
+<div class="overlay" id="overlay" onclick="handleOverlayClick(event)">
   <div class="modal" id="modal-inner"></div>
 </div>
 
 <script>
 const AIS = [
-  {id:1,name:"ChatGPT",icon:"💬",color:"#E1F5EE",domain:"Polyvalent",type:"Texte",desc:"Assistant IA généraliste pour rédaction, analyse, code et conversation.",price:"Freemium",link:"https://chat.openai.com",strengths:"Polyvalence, plugins, GPT-4o",weakness:"Peut halluciner",rating:"9.2"},
-  {id:2,name:"Claude",icon:"✦",color:"#EEEDFE",domain:"Polyvalent",type:"Texte",desc:"IA Anthropic axée sur la sécurité, l'analyse longue et la rédaction.",price:"Freemium",link:"https://claude.ai",strengths:"Longs contextes, éthique, rédaction",weakness:"Pas d'images générées",rating:"9.0"},
-  {id:3,name:"Gemini",icon:"✦",color:"#E6F1FB",domain:"Polyvalent",type:"Texte",desc:"IA Google multimodale intégrée à l'écosystème Google.",price:"Freemium",link:"https://gemini.google.com",strengths:"Intégration Google, multimodal",weakness:"Moins précis en code",rating:"8.5"},
-  {id:4,name:"Midjourney",icon:"🎨",color:"#FAECE7",domain:"Design",type:"Image",desc:"Génération d'images artistiques de haute qualité via Discord.",price:"Payant",link:"https://midjourney.com",strengths:"Qualité artistique exceptionnelle",weakness:"Interface Discord uniquement",rating:"9.5"},
-  {id:5,name:"DALL·E 3",icon:"🖼️",color:"#FAECE7",domain:"Design",type:"Image",desc:"Génération d'images depuis une description texte par OpenAI.",price:"Freemium",link:"https://openai.com/dall-e-3",strengths:"Précision du prompt, intégré ChatGPT",weakness:"Moins artistique que Midjourney",rating:"8.7"},
-  {id:6,name:"Runway",icon:"🎬",color:"#FBEAF0",domain:"Vidéo",type:"Vidéo",desc:"Génération et édition vidéo par IA, effets visuels avancés.",price:"Freemium",link:"https://runway.ml",strengths:"Génération vidéo, inpainting",weakness:"Coûteux à grande échelle",rating:"9.1"},
-  {id:7,name:"GitHub Copilot",icon:"</> ",color:"#E6F1FB",domain:"Dev",type:"Code",desc:"Assistant de code intégré à VSCode et JetBrains par GitHub.",price:"Payant",link:"https://github.com/features/copilot",strengths:"Complétion temps réel, multi-langages",weakness:"Abonnement requis",rating:"9.3"},
-  {id:8,name:"Cursor",icon:"⌨️",color:"#E6F1FB",domain:"Dev",type:"Code",desc:"Éditeur de code avec IA intégrée pour la génération et le refactoring.",price:"Freemium",link:"https://cursor.sh",strengths:"Refactoring intelligent, contexte repo",weakness:"IDE propriétaire",rating:"9.0"},
-  {id:9,name:"ElevenLabs",icon:"🎙️",color:"#EAF3DE",domain:"Audio",type:"Audio",desc:"Synthèse vocale ultra-réaliste et clonage de voix.",price:"Freemium",link:"https://elevenlabs.io",strengths:"Voix naturelles, multi-langues",weakness:"Coûteux en volume",rating:"9.4"},
-  {id:10,name:"Suno",icon:"🎵",color:"#EAF3DE",domain:"Audio",type:"Audio",desc:"Génération de musique originale complète à partir de texte.",price:"Freemium",link:"https://suno.ai",strengths:"Musique complète, varié",weakness:"Droits à vérifier",rating:"8.8"},
-  {id:11,name:"Perplexity",icon:"🔍",color:"#FAEEDA",domain:"Recherche",type:"Texte",desc:"Moteur de recherche IA avec sources citées en temps réel.",price:"Freemium",link:"https://perplexity.ai",strengths:"Sources citées, recherche web",weakness:"Moins créatif",rating:"8.9"},
-  {id:12,name:"Notion AI",icon:"📝",color:"#FAEEDA",domain:"Productivité",type:"Texte",desc:"IA intégrée à Notion pour résumer, rédiger et organiser.",price:"Payant",link:"https://notion.so/product/ai",strengths:"Intégré à Notion, résumés",weakness:"Nécessite abonnement Notion",rating:"8.3"},
-  {id:13,name:"Kling AI",icon:"🎬",color:"#FBEAF0",domain:"Vidéo",type:"Vidéo",desc:"Génération vidéo réaliste haute qualité depuis image ou texte.",price:"Freemium",link:"https://klingai.com",strengths:"Réalisme, mouvement fluide",weakness:"Accès limité",rating:"9.0"},
-  {id:14,name:"Stable Diffusion",icon:"🎨",color:"#FAECE7",domain:"Design",type:"Image",desc:"Modèle open source de génération d'images, déployable localement.",price:"Gratuit",link:"https://stability.ai",strengths:"Open source, personnalisable",weakness:"Technique à configurer",rating:"8.6"},
-  {id:15,name:"Grammarly AI",icon:"✍️",color:"#E1F5EE",domain:"Rédaction",type:"Texte",desc:"Correction et amélioration de texte avec suggestions stylistiques.",price:"Freemium",link:"https://grammarly.com",strengths:"Correction précise, intégrations",weakness:"Anglais principalement",rating:"8.4"},
-  {id:16,name:"Adobe Firefly",icon:"🔥",color:"#FAECE7",domain:"Design",type:"Image",desc:"Génération d'images IA intégrée à Creative Cloud d'Adobe.",price:"Freemium",link:"https://firefly.adobe.com",strengths:"Intégration Adobe, droits d'auteur clairs",weakness:"Moins puissant que Midjourney",rating:"8.5"},
-  {id:17,name:"Jasper",icon:"📣",color:"#FAEEDA",domain:"Marketing",type:"Texte",desc:"Rédaction marketing IA pour campagnes, emails et contenus.",price:"Payant",link:"https://jasper.ai",strengths:"Templates marketing, Brand Voice",weakness:"Coûteux",rating:"8.2"},
-  {id:18,name:"Synthesia",icon:"👤",color:"#FBEAF0",domain:"Vidéo",type:"Vidéo",desc:"Création de vidéos avec avatars IA réalistes et narration.",price:"Payant",link:"https://synthesia.io",strengths:"Avatars réalistes, multi-langues",weakness:"Prix élevé",rating:"8.8"},
-  {id:19,name:"Descript",icon:"🎞️",color:"#FBEAF0",domain:"Audio",type:"Audio",desc:"Édition audio/vidéo par IA via transcription texto.",price:"Freemium",link:"https://descript.com",strengths:"Édition par texte, transcription",weakness:"Courbe d'apprentissage",rating:"8.6"},
-  {id:20,name:"v0 by Vercel",icon:"⚡",color:"#E6F1FB",domain:"Dev",type:"Code",desc:"Génération d'interfaces React/Tailwind depuis une description.",price:"Freemium",link:"https://v0.dev",strengths:"UI React instantanée, Tailwind",weakness:"Front-end uniquement",rating:"9.1"},
+  // POLYVALENT
+  {id:1,name:"ChatGPT",icon:"💬",iconBg:"#1a2a1a",domain:"Polyvalent",type:"Texte",desc:"Assistant IA généraliste d'OpenAI pour rédaction, analyse, code et conversation naturelle.",price:"Freemium",link:"https://chat.openai.com",strengths:"Polyvalence, plugins, GPT-4o, vision",weakness:"Peut halluciner sur les faits récents",rating:9.2,tags:["GPT-4o","OpenAI"]},
+  {id:2,name:"Claude",icon:"✦",iconBg:"#1a1a2a",domain:"Polyvalent",type:"Texte",desc:"IA d'Anthropic axée sécurité, idéale pour l'analyse de longs documents et la rédaction nuancée.",price:"Freemium",link:"https://claude.ai",strengths:"Contexte 200k tokens, éthique, rédaction",weakness:"Pas de génération d'images",rating:9.0,tags:["Anthropic","Sécurité"]},
+  {id:3,name:"Gemini",icon:"✦",iconBg:"#1a1f2a",domain:"Polyvalent",type:"Texte",desc:"IA Google multimodale intégrée à l'écosystème Google Workspace.",price:"Freemium",link:"https://gemini.google.com",strengths:"Google Workspace, recherche web, multimodal",weakness:"Moins précis en code complexe",rating:8.5,tags:["Google","Multimodal"]},
+  {id:4,name:"Mistral",icon:"🌪️",iconBg:"#1f1a2a",domain:"Polyvalent",type:"Texte",desc:"Modèle open source français performant, léger et déployable localement.",price:"Freemium",link:"https://mistral.ai",strengths:"Open source, français, rapide, léger",weakness:"Moins polyvalent que GPT-4",rating:8.3,tags:["Open source","Français"]},
+  {id:5,name:"Perplexity",icon:"🔍",iconBg:"#1a2020",domain:"Recherche",type:"Texte",desc:"Moteur de recherche IA avec citations en temps réel depuis le web.",price:"Freemium",link:"https://perplexity.ai",strengths:"Sources citées, actualité, web en temps réel",weakness:"Moins créatif que les assistants",rating:8.9,tags:["Recherche","Citations"]},
+  {id:6,name:"Grok",icon:"⚡",iconBg:"#1a1a1a",domain:"Polyvalent",type:"Texte",desc:"IA de xAI (Elon Musk) avec accès à X/Twitter en temps réel.",price:"Payant",link:"https://grok.x.ai",strengths:"Accès temps réel X, humour, actualité",weakness:"Lié à l'abonnement X Premium",rating:8.0,tags:["xAI","Temps réel"]},
+
+  // DESIGN / IMAGE
+  {id:7,name:"Midjourney",icon:"🎨",iconBg:"#2a1a1a",domain:"Design",type:"Image",desc:"Génération d'images artistiques ultra-qualitatives via une interface Discord.",price:"Payant",link:"https://midjourney.com",strengths:"Qualité artistique exceptionnelle, styles variés",weakness:"Interface Discord uniquement",rating:9.5,tags:["Artistique","Discord"]},
+  {id:8,name:"DALL·E 3",icon:"🖼️",iconBg:"#2a1f1a",domain:"Design",type:"Image",desc:"Génération d'images précise depuis une description texte, intégré à ChatGPT.",price:"Freemium",link:"https://openai.com/dall-e-3",strengths:"Précision du prompt, intégré ChatGPT",weakness:"Style moins artistique que Midjourney",rating:8.7,tags:["OpenAI","Précis"]},
+  {id:9,name:"Stable Diffusion",icon:"🌀",iconBg:"#1a2a20",domain:"Design",type:"Image",desc:"Modèle open source de génération d'images, déployable localement sur votre machine.",price:"Gratuit",link:"https://stability.ai",strengths:"Open source, personnalisable, local",weakness:"Installation technique",rating:8.6,tags:["Open source","Local"]},
+  {id:10,name:"Adobe Firefly",icon:"🔥",iconBg:"#2a1a10",domain:"Design",type:"Image",desc:"Génération d'images IA intégrée à Creative Cloud, droits d'auteur sécurisés.",price:"Freemium",link:"https://firefly.adobe.com",strengths:"Intégration Adobe CC, droits clairs",weakness:"Moins puissant que Midjourney",rating:8.5,tags:["Adobe","Droits sécurisés"]},
+  {id:11,name:"Leonardo AI",icon:"🦁",iconBg:"#2a2010",domain:"Design",type:"Image",desc:"Plateforme de génération d'images IA avec modèles spécialisés (jeux, concept art).",price:"Freemium",link:"https://leonardo.ai",strengths:"Modèles spécialisés, cohérence de style",weakness:"Crédits limités en gratuit",rating:8.8,tags:["Concept art","Jeux vidéo"]},
+  {id:12,name:"Ideogram",icon:"💡",iconBg:"#1a1a2a",domain:"Design",type:"Image",desc:"Génération d'images avec typographie précise, idéal pour logos et affiches.",price:"Freemium",link:"https://ideogram.ai",strengths:"Texte dans les images, typographie",weakness:"Moins de styles artistiques",rating:8.4,tags:["Typographie","Logos"]},
+  {id:13,name:"Canva AI",icon:"🎯",iconBg:"#1a2a20",domain:"Design",type:"Image",desc:"Suite de design complète avec outils IA intégrés pour créer visuels et présentations.",price:"Freemium",link:"https://canva.com",strengths:"Tout-en-un, facile, templates",weakness:"Moins puissant que des outils dédiés",rating:8.2,tags:["Tout-en-un","Templates"]},
+
+  // VIDÉO
+  {id:14,name:"Runway",icon:"🎬",iconBg:"#2a1a20",domain:"Vidéo",type:"Vidéo",desc:"Génération et édition vidéo par IA, effets visuels avancés et Gen-2.",price:"Freemium",link:"https://runway.ml",strengths:"Génération vidéo, inpainting, effets",weakness:"Coûteux à grande échelle",rating:9.1,tags:["Gen-2","Effets visuels"]},
+  {id:15,name:"Kling AI",icon:"🎥",iconBg:"#2a201a",domain:"Vidéo",type:"Vidéo",desc:"Génération vidéo réaliste haute qualité depuis image ou texte.",price:"Freemium",link:"https://klingai.com",strengths:"Réalisme exceptionnel, mouvements fluides",weakness:"Accès limité en Europe",rating:9.0,tags:["Réalisme","Chine"]},
+  {id:16,name:"Synthesia",icon:"👤",iconBg:"#1a2020",domain:"Vidéo",type:"Vidéo",desc:"Création de vidéos corporate avec avatars IA réalistes et narration multi-langues.",price:"Payant",link:"https://synthesia.io",strengths:"Avatars réalistes, 120+ langues",weakness:"Prix élevé",rating:8.8,tags:["Avatars","Corporate"]},
+  {id:17,name:"HeyGen",icon:"🧑‍💼",iconBg:"#202a1a",domain:"Vidéo",type:"Vidéo",desc:"Création de vidéos avec avatars personnalisés et traduction vidéo en temps réel.",price:"Freemium",link:"https://heygen.com",strengths:"Traduction vidéo, avatar personnalisé",weakness:"Watermark en gratuit",rating:8.7,tags:["Traduction","Avatars"]},
+  {id:18,name:"Pika",icon:"🌊",iconBg:"#1a1a2a",domain:"Vidéo",type:"Vidéo",desc:"Génération de vidéos courtes et cinématiques depuis texte ou image.",price:"Freemium",link:"https://pika.art",strengths:"Cinématique, effets créatifs",weakness:"Vidéos courtes uniquement",rating:8.5,tags:["Cinématique","Créatif"]},
+  {id:19,name:"Descript",icon:"🎞️",iconBg:"#2a1a10",domain:"Vidéo",type:"Vidéo",desc:"Édition audio et vidéo par IA via transcription texte, suppression de mots de remplissage.",price:"Freemium",link:"https://descript.com",strengths:"Édition par texte, transcription",weakness:"Courbe d'apprentissage",rating:8.6,tags:["Transcription","Podcast"]},
+
+  // DEV
+  {id:20,name:"GitHub Copilot",icon:"⌨️",iconBg:"#1a1a2a",domain:"Dev",type:"Code",desc:"Assistant de code temps réel intégré à VSCode et JetBrains par GitHub/OpenAI.",price:"Payant",link:"https://github.com/features/copilot",strengths:"Complétion temps réel, multi-langages, chat",weakness:"Abonnement requis",rating:9.3,tags:["GitHub","VSCode"]},
+  {id:21,name:"Cursor",icon:"🖱️",iconBg:"#1a2020",domain:"Dev",type:"Code",desc:"Éditeur de code IA natif pour la génération, le refactoring et la compréhension de codebase.",price:"Freemium",link:"https://cursor.sh",strengths:"Refactoring intelligent, contexte repo complet",weakness:"IDE propriétaire",rating:9.0,tags:["IDE","Refactoring"]},
+  {id:22,name:"v0 by Vercel",icon:"⚡",iconBg:"#2a2a1a",domain:"Dev",type:"Code",desc:"Génération d'interfaces React/Tailwind depuis une description en langage naturel.",price:"Freemium",link:"https://v0.dev",strengths:"UI React/Tailwind instantanée",weakness:"Front-end uniquement",rating:9.1,tags:["React","Tailwind","UI"]},
+  {id:23,name:"Replit AI",icon:"🔄",iconBg:"#1a2a1a",domain:"Dev",type:"Code",desc:"IDE en ligne avec IA intégrée pour coder, déployer et apprendre en une seule plateforme.",price:"Freemium",link:"https://replit.com",strengths:"Tout-en-un, déploiement facile, apprentissage",weakness:"Performances limitées",rating:8.4,tags:["Cloud IDE","Déploiement"]},
+  {id:24,name:"Tabnine",icon:"🧠",iconBg:"#1a1a2a",domain:"Dev",type:"Code",desc:"Complétion de code IA entraînable sur votre propre codebase d'entreprise.",price:"Freemium",link:"https://tabnine.com",strengths:"Données privées, personnalisable",weakness:"Moins puissant que Copilot",rating:8.2,tags:["Privé","Entreprise"]},
+  {id:25,name:"Windsurf",icon:"🏄",iconBg:"#1a2a2a",domain:"Dev",type:"Code",desc:"IDE IA de Codeium avec agent autonome pour construire des applications complètes.",price:"Freemium",link:"https://codeium.com/windsurf",strengths:"Agent autonome, Cascade, gratuit généreux",weakness:"Nouveau sur le marché",rating:8.9,tags:["Agent","Codeium"]},
+
+  // AUDIO
+  {id:26,name:"ElevenLabs",icon:"🎙️",iconBg:"#2a1a1a",domain:"Audio",type:"Audio",desc:"Synthèse vocale ultra-réaliste et clonage de voix en quelques secondes.",price:"Freemium",link:"https://elevenlabs.io",strengths:"Voix naturelles, clonage, 30+ langues",weakness:"Coûteux en volume",rating:9.4,tags:["Voix","Clonage"]},
+  {id:27,name:"Suno",icon:"🎵",iconBg:"#1a2a10",domain:"Audio",type:"Audio",desc:"Génération de musique originale complète avec paroles et voix depuis un prompt texte.",price:"Freemium",link:"https://suno.ai",strengths:"Musique complète, varié, paroles",weakness:"Droits d'auteur à vérifier",rating:8.8,tags:["Musique","Paroles"]},
+  {id:28,name:"Udio",icon:"🎼",iconBg:"#201a2a",domain:"Audio",type:"Audio",desc:"Génération musicale haute fidélité avec contrôle fin sur le style et les instruments.",price:"Freemium",link:"https://udio.com",strengths:"Haute fidélité, contrôle du style",weakness:"Limitations en gratuit",rating:8.7,tags:["Musique","Haute fidélité"]},
+  {id:29,name:"Whisper",icon:"👂",iconBg:"#1a1a20",domain:"Audio",type:"Audio",desc:"Transcription audio vers texte open source d'OpenAI, précision remarquable.",price:"Gratuit",link:"https://openai.com/research/whisper",strengths:"Open source, précision, multi-langues",weakness:"Nécessite installation",rating:9.0,tags:["Transcription","Open source"]},
+  {id:30,name:"Adobe Podcast",icon:"🎚️",iconBg:"#2a1510",domain:"Audio",type:"Audio",desc:"Amélioration de la qualité audio et suppression du bruit de fond par IA.",price:"Gratuit",link:"https://podcast.adobe.com",strengths:"Qualité studio instantanée, gratuit",weakness:"Fonctionnalités limitées",rating:8.5,tags:["Adobe","Podcast","Gratuit"]},
+
+  // MARKETING
+  {id:31,name:"Jasper",icon:"📣",iconBg:"#2a2010",domain:"Marketing",type:"Texte",desc:"Rédaction marketing IA pour campagnes publicitaires, emails et contenu brand.",price:"Payant",link:"https://jasper.ai",strengths:"Templates marketing, Brand Voice",weakness:"Coûteux, 49$/mois minimum",rating:8.2,tags:["Brand Voice","Campagnes"]},
+  {id:32,name:"Copy.ai",icon:"✍️",iconBg:"#1a2020",domain:"Marketing",type:"Texte",desc:"Générateur de textes marketing avec workflows automatisés pour les équipes.",price:"Freemium",link:"https://copy.ai",strengths:"Workflows, templates, facile",weakness:"Qualité variable",rating:8.0,tags:["Workflows","Copywriting"]},
+  {id:33,name:"Surfer SEO",icon:"🏄",iconBg:"#1a201a",domain:"Marketing",type:"Texte",desc:"Optimisation SEO assistée par IA avec analyse des mots-clés et suggestions de contenu.",price:"Payant",link:"https://surferseo.com",strengths:"SEO précis, analyse SERP",weakness:"Très coûteux",rating:8.3,tags:["SEO","Contenu"]},
+  {id:34,name:"Instantly AI",icon:"📧",iconBg:"#1a1a2a",domain:"Marketing",type:"Texte",desc:"Automatisation d'emails de prospection avec personnalisation IA à grande échelle.",price:"Payant",link:"https://instantly.ai",strengths:"Cold email, personnalisation, volume",weakness:"Risque de spam",rating:8.1,tags:["Email","Prospection"]},
+
+  // PRODUCTIVITÉ
+  {id:35,name:"Notion AI",icon:"📝",iconBg:"#1a1a1a",domain:"Productivité",type:"Texte",desc:"IA intégrée à Notion pour résumer, rédiger, traduire et organiser vos documents.",price:"Payant",link:"https://notion.so/product/ai",strengths:"Intégré Notion, résumés, traduction",weakness:"Nécessite abonnement Notion",rating:8.3,tags:["Notion","Organisation"]},
+  {id:36,name:"Otter.ai",icon:"🦦",iconBg:"#1a2020",domain:"Productivité",type:"Audio",desc:"Transcription de réunions en temps réel avec résumés et points d'action automatiques.",price:"Freemium",link:"https://otter.ai",strengths:"Temps réel, résumés auto, intégrations",weakness:"Anglais principalement",rating:8.5,tags:["Réunions","Transcription"]},
+  {id:37,name:"Gamma",icon:"🎯",iconBg:"#1a202a",domain:"Productivité",type:"Texte",desc:"Création de présentations et documents visuels depuis un simple prompt en secondes.",price:"Freemium",link:"https://gamma.app",strengths:"Présentations rapides, beau design",weakness:"Personnalisation limitée",rating:8.4,tags:["Présentations","Rapide"]},
+  {id:38,name:"Beautiful.ai",icon:"💎",iconBg:"#1a1a2a",domain:"Productivité",type:"Texte",desc:"Présentations automatiquement bien designées avec IA et templates intelligents.",price:"Payant",link:"https://beautiful.ai",strengths:"Design auto, templates smart",weakness:"Moins flexible que PowerPoint",rating:8.0,tags:["Slides","Design auto"]},
+
+  // RÉDACTION
+  {id:39,name:"Grammarly",icon:"✅",iconBg:"#1a2a1a",domain:"Rédaction",type:"Texte",desc:"Correction grammaticale et stylistique avancée intégrée à votre navigateur et applications.",price:"Freemium",link:"https://grammarly.com",strengths:"Précision, intégrations multiples",weakness:"Optimisé pour l'anglais",rating:8.4,tags:["Correction","Anglais"]},
+  {id:40,name:"Writesonic",icon:"🚀",iconBg:"#2a1a10",domain:"Rédaction",type:"Texte",desc:"Génération de contenu long format avec SEO intégré, articles et landing pages.",price:"Freemium",link:"https://writesonic.com",strengths:"SEO intégré, long format, articles",weakness:"Qualité inégale",rating:8.1,tags:["SEO","Long format"]},
+  {id:41,name:"Hemingway",icon:"📖",iconBg:"#2a201a",domain:"Rédaction",type:"Texte",desc:"Amélioration de la lisibilité et simplicité de vos textes, style Hemingway.",price:"Freemium",link:"https://hemingwayapp.com",strengths:"Lisibilité, simplicité, clarté",weakness:"Pas de génération IA",rating:7.8,tags:["Lisibilité","Clarté"]},
+  {id:42,name:"DeepL",icon:"🌐",iconBg:"#1a1a2a",domain:"Rédaction",type:"Texte",desc:"Traduction automatique de haute qualité, la plus précise du marché selon les tests.",price:"Freemium",link:"https://deepl.com",strengths:"Meilleure qualité traduction, naturel",weakness:"Uniquement traduction",rating:9.1,tags:["Traduction","Qualité"]},
 ];
 
-const DOMAINS = ["Tous",...[...new Set(AIS.map(a=>a.domain))].sort()];
-const TYPES = ["Tous",...[...new Set(AIS.map(a=>a.type))].sort()];
-let activeDomain="Tous",activeType="Tous",selected=[];
+const DOMAINS = ["Tous", ...[...new Set(AIS.map(a => a.domain))].sort()];
+const TYPES = ["Tous", ...[...new Set(AIS.map(a => a.type))].sort()];
+let activeDomain = "Tous", activeType = "Tous", selected = [];
 
-function buildFilters(){
-  document.getElementById("domains").innerHTML=DOMAINS.map(d=>`<span class="tag${d===activeDomain?' active':''}" onclick="setDomain('${d}')">${d}</span>`).join("");
-  document.getElementById("types").innerHTML=TYPES.map(t=>`<type-tag class="type-tag${t===activeType?' active':''}" onclick="setType('${t}')">${t}</type-tag>`).join("");
+const TYPE_BADGE = {Texte:"blue",Image:"coral",Vidéo:"purple",Code:"green",Audio:"amber"};
+const PRICE_COLOR = {Gratuit:"green",Freemium:"blue",Payant:"amber"};
+
+function buildFilters() {
+  document.getElementById("domains").innerHTML = DOMAINS.map(d =>
+    `<span class="tag${d===activeDomain?' active':''}" onclick="setDomain('${d}')">${d}</span>`
+  ).join("");
+  document.getElementById("types").innerHTML = TYPES.map(t =>
+    `<span class="tag${t===activeType?' active':''}" onclick="setType('${t}')">${t}</span>`
+  ).join("");
 }
-function setDomain(d){activeDomain=d;buildFilters();render()}
-function setType(t){activeType=t;buildFilters();render()}
 
-function render(){
-  const q=document.getElementById("search").value.toLowerCase();
-  const sort=document.getElementById("sort").value;
-  let list=AIS.filter(a=>{
-    const dm=activeDomain==="Tous"||a.domain===activeDomain;
-    const tp=activeType==="Tous"||a.type===activeType;
-    const sq=!q||a.name.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q)||a.domain.toLowerCase().includes(q);
-    return dm&&tp&&sq;
+function setDomain(d) { activeDomain = d; buildFilters(); render(); }
+function setType(t) { activeType = t; buildFilters(); render(); }
+
+function render() {
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  const sort = document.getElementById("sort").value;
+  let list = AIS.filter(a => {
+    const dm = activeDomain === "Tous" || a.domain === activeDomain;
+    const tp = activeType === "Tous" || a.type === activeType;
+    const sq = !q || a.name.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q) || a.domain.toLowerCase().includes(q) || (a.tags||[]).some(t=>t.toLowerCase().includes(q));
+    return dm && tp && sq;
   });
-  if(sort==="name") list.sort((a,b)=>a.name.localeCompare(b.name));
-  else if(sort==="free") list.sort((a,b)=>{const o={Gratuit:0,Freemium:1,Payant:2};return o[a.price]-o[b.price];});
-  const badgeColor={Texte:"blue",Image:"coral",Vidéo:"pink",Code:"teal",Audio:"teal"};
-  const priceColor={Gratuit:"teal",Freemium:"blue",Payant:"amber"};
-  document.getElementById("grid").innerHTML=list.length?list.map(a=>`
+  if (sort === "name") list.sort((a,b) => a.name.localeCompare(b.name));
+  else if (sort === "rating") list.sort((a,b) => b.rating - a.rating);
+  else if (sort === "free") list.sort((a,b) => {const o={Gratuit:0,Freemium:1,Payant:2};return o[a.price]-o[b.price];});
+
+  document.getElementById("results-count").textContent = `${list.length} outil${list.length>1?'s':''} trouvé${list.length>1?'s':''}`;
+  document.getElementById("compare-hint").style.display = "inline";
+
+  document.getElementById("grid").innerHTML = list.length ? list.map(a => `
     <div class="card${selected.includes(a.id)?' selected':''}" id="card-${a.id}">
-      <div class="card-top">
-        <div class="card-icon" style="background:${a.color}">${a.icon}</div>
-        <div><div class="card-name">${a.name}</div><div class="card-domain">${a.domain}</div></div>
+      <div class="card-rating">★ ${a.rating}</div>
+      <div class="card-header">
+        <div class="card-icon" style="background:${a.iconBg}">${a.icon}</div>
+        <div>
+          <div class="card-title">${a.name}</div>
+          <div class="card-domain">${a.domain}</div>
+        </div>
       </div>
       <div class="card-desc">${a.desc}</div>
-      <div class="card-tags">
-        <span class="badge badge-${badgeColor[a.type]||'blue'}">${a.type}</span>
-        <span class="badge badge-${priceColor[a.price]||'amber'}">${a.price}</span>
-        <span class="badge badge-purple">★ ${a.rating}</span>
+      <div class="card-badges">
+        <span class="badge badge-${TYPE_BADGE[a.type]||'gray'}">${a.type}</span>
+        <span class="badge badge-${PRICE_COLOR[a.price]||'gray'}">${a.price}</span>
+        ${(a.tags||[]).slice(0,2).map(t=>`<span class="badge badge-gray">${t}</span>`).join("")}
       </div>
-      <div style="display:flex;gap:6px;margin-top:10px">
-        <button onclick="openDetail(${a.id})" style="flex:1;height:30px;font-size:12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer">Voir la fiche</button>
-        <button onclick="toggleSelect(${a.id})" style="height:30px;width:30px;font-size:14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:${selected.includes(a.id)?'#E6F1FB':'var(--color-background-primary)'};cursor:pointer" title="Comparer">${selected.includes(a.id)?'✓':'+'}</button>
+      <div class="card-footer">
+        <button class="btn-detail" onclick="openDetail(${a.id})">Voir la fiche →</button>
+        <button class="btn-compare${selected.includes(a.id)?' active':''}" onclick="toggleSelect(${a.id})" title="Ajouter à la comparaison">${selected.includes(a.id)?'✓':'+'}</button>
       </div>
-    </div>`).join(""):`<div class="no-results" style="grid-column:1/-1"><div class="empty-icon">🔍</div><div>Aucune IA trouvée</div><div style="font-size:12px;margin-top:4px">Essayez d'autres filtres</div></div>`;
+    </div>`).join("") : `<div class="no-results"><div class="no-results-icon">🔍</div><h3>Aucun résultat</h3><p>Essayez d'autres termes ou filtres</p></div>`;
+  
   updateCompareBar();
 }
 
-function toggleSelect(id){
-  if(selected.includes(id)){selected=selected.filter(x=>x!==id);}
-  else if(selected.length<4){selected.push(id);}
+function toggleSelect(id) {
+  if (selected.includes(id)) { selected = selected.filter(x => x !== id); }
+  else if (selected.length < 4) { selected.push(id); }
   render();
 }
-function clearCompare(){selected=[];render();}
-function updateCompareBar(){
-  const cb=document.getElementById("cbar");
-  if(selected.length>0){
-    cb.style.display="flex";
-    document.getElementById("ccount").textContent=`${selected.length} IA sélectionnée${selected.length>1?'s':''} pour comparaison`;
-  } else {cb.style.display="none";}
-}
 
-function openDetail(id){
-  const a=AIS.find(x=>x.id===id);
-  document.getElementById("modal-inner").innerHTML=`
-    <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
-      <div style="width:44px;height:44px;border-radius:10px;background:${a.color};display:flex;align-items:center;justify-content:center;font-size:22px">${a.icon}</div>
-      <div><h2>${a.name}</h2><p class="modal-sub">${a.domain} · ${a.type}</p></div>
-    </div>
-    <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:1rem;line-height:1.6">${a.desc}</p>
-    <div class="detail-row"><span class="detail-label">Note</span><span class="detail-val">★ ${a.rating}/10</span></div>
-    <div class="detail-row"><span class="detail-label">Tarif</span><span class="detail-val">${a.price}</span></div>
-    <div class="detail-row"><span class="detail-label">Points forts</span><span class="detail-val" style="max-width:220px">${a.strengths}</span></div>
-    <div class="detail-row"><span class="detail-label">Limite principale</span><span class="detail-val">${a.weakness}</span></div>
-    <div class="detail-row"><span class="detail-label">Lien</span><span class="detail-val"><a href="${a.link}" style="color:#185FA5">${a.link.replace('https://','')}</a></span></div>
-    <div style="margin-top:1rem;display:flex;gap:8px">
-      <button onclick="toggleSelect(${a.id});closeModal()" style="flex:1;height:36px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;font-size:13px">${selected.includes(a.id)?'✓ Ajoutée':'+ Comparer'}</button>
-      <a href="${a.link}" style="flex:1;height:36px;border-radius:var(--border-radius-md);background:#185FA5;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;text-decoration:none">Visiter le site ↗</a>
-    </div>`;
-  document.getElementById("modal").classList.add("open");
-}
+function clearCompare() { selected = []; render(); }
 
-function openCompare(){
-  const items=AIS.filter(a=>selected.includes(a.id));
-  const rows=["Type","Tarif","Note","Points forts","Limite"].map(k=>{
-    const vals=items.map(a=>{
-      if(k==="Type")return a.type;if(k==="Tarif")return a.price;
-      if(k==="Note")return`★ ${a.rating}`;if(k==="Points forts")return a.strengths;
-      return a.weakness;
-    });
-    return`<tr><td style="font-weight:500;color:var(--color-text-secondary)">${k}</td>${vals.map(v=>`<td>${v}</td>`).join("")}</tr>`;
-  }).join("");
-  document.getElementById("modal-inner").innerHTML=`
-    <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
-    <h2 style="margin-bottom:1rem">Comparaison</h2>
-    <div style="overflow-x:auto"><table class="compare-table">
-      <thead><tr><th>Critère</th>${items.map(a=>`<th>${a.icon} ${a.name}</th>`).join("")}</tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>
-    <div style="margin-top:1rem;display:flex;gap:8px">
-      <button onclick="closeModal()" style="height:36px;padding:0 20px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);cursor:pointer;font-size:13px">Fermer</button>
-    </div>`;
-  document.getElementById("modal").classList.add("open");
-}
-
-function closeModal(e){
-  if(!e||e.target===document.getElementById("modal")||e.currentTarget===document.getElementById("modal-inner").querySelector(".modal-close")){
-    document.getElementById("modal").classList.remove("open");
+function updateCompareBar() {
+  const bar = document.getElementById("compare-bar");
+  if (selected.length > 0) {
+    bar.classList.add("show");
+    const items = AIS.filter(a => selected.includes(a.id));
+    document.getElementById("compare-chips").innerHTML = items.map(a =>
+      `<div class="chip">${a.icon} ${a.name}<button onclick="toggleSelect(${a.id})">×</button></div>`
+    ).join("");
+  } else {
+    bar.classList.remove("show");
   }
 }
 
+function openDetail(id) {
+  const a = AIS.find(x => x.id === id);
+  document.getElementById("modal-inner").innerHTML = `
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-head">
+      <div class="modal-icon" style="background:${a.iconBg}">${a.icon}</div>
+      <div>
+        <div class="modal-name">${a.name}</div>
+        <div class="modal-sub">${a.domain} · ${a.type} · ${a.price}</div>
+      </div>
+    </div>
+    <p class="modal-desc">${a.desc}</p>
+    <div class="detail-grid">
+      <div class="detail-box"><div class="detail-box-label">Note</div><div class="detail-box-val" style="color:#f59e0b">★ ${a.rating}/10</div></div>
+      <div class="detail-box"><div class="detail-box-label">Tarif</div><div class="detail-box-val">${a.price}</div></div>
+      <div class="detail-box" style="grid-column:1/-1"><div class="detail-box-label">Points forts</div><div class="detail-box-val" style="font-weight:400;font-size:13px">${a.strengths}</div></div>
+      <div class="detail-box" style="grid-column:1/-1"><div class="detail-box-label">Limite principale</div><div class="detail-box-val" style="font-weight:400;font-size:13px;color:#8a8a9a">${a.weakness}</div></div>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem">${(a.tags||[]).map(t=>`<span class="badge badge-gray">${t}</span>`).join("")}</div>
+    <div class="modal-actions">
+      <a href="${a.link}" target="_blank" class="btn-visit">Visiter le site ↗</a>
+      <button class="btn-add-compare" onclick="toggleSelect(${a.id});closeModal()">${selected.includes(a.id)?'✓ Dans la comparaison':'+ Comparer'}</button>
+    </div>`;
+  document.getElementById("overlay").classList.add("open");
+}
+
+function openCompare() {
+  const items = AIS.filter(a => selected.includes(a.id));
+  const rows = [
+    ["Type", a => `<span class="badge badge-${TYPE_BADGE[a.type]||'gray'}">${a.type}</span>`],
+    ["Domaine", a => a.domain],
+    ["Tarif", a => `<span class="badge badge-${PRICE_COLOR[a.price]||'gray'}">${a.price}</span>`],
+    ["Note", a => `<span style="color:#f59e0b;font-weight:600">★ ${a.rating}</span>`],
+    ["Points forts", a => a.strengths],
+    ["Limite", a => `<span style="color:#8a8a9a">${a.weakness}</span>`],
+    ["Lien", a => `<a href="${a.link}" target="_blank" style="color:#7c6ff7">${a.link.replace('https://','')}</a>`],
+  ];
+  document.getElementById("modal-inner").innerHTML = `
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 style="font-family:'Syne',sans-serif;font-size:20px;margin-bottom:1rem">Comparaison</h2>
+    <div style="overflow-x:auto">
+    <table class="compare-table">
+      <thead><tr><th>Critère</th>${items.map(a=>`<th>${a.icon} ${a.name}</th>`).join("")}</tr></thead>
+      <tbody>${rows.map(([label,fn])=>`<tr><td>${label}</td>${items.map(a=>`<td>${fn(a)}</td>`).join("")}</tr>`).join("")}</tbody>
+    </table></div>
+    <div style="margin-top:1.25rem;text-align:right"><button class="btn-add-compare" onclick="closeModal()">Fermer</button></div>`;
+  document.getElementById("overlay").classList.add("open");
+  document.querySelector("#modal-inner").classList.add("compare-modal");
+}
+
+function closeModal() { document.getElementById("overlay").classList.remove("open"); }
+function handleOverlayClick(e) { if (e.target === document.getElementById("overlay")) closeModal(); }
+
+document.getElementById("stat-total").textContent = AIS.length + "+";
 buildFilters();
 render();
 </script>
+</body>
+</html>
