@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -193,9 +192,78 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
   header{padding:0 1rem}
   .search-wrap,.grid-wrap{padding-left:1rem;padding-right:1rem}
 }
+
+/* Bannière de localisation */
+.geo-banner {
+    background: linear-gradient(135deg, #0f3460, #16213e);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 1px solid var(--acbd);
+    font-size: 12px;
+}
+.geo-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.geo-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1.5s infinite;
+}
+.geo-dot-active { background: #4ade80; box-shadow: 0 0 5px #4ade80; }
+.geo-dot-inactive { background: #f87171; }
+.geo-banner-btn {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+.geo-banner-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+.geo-banner-btn-primary {
+    background: #e94560;
+    border-color: #e94560;
+}
+.geo-banner-btn-primary:hover {
+    background: #c72a48;
+}
+@keyframes pulse {
+    0% { opacity: 0.5; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+.geo-status-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.8);
+}
 </style>
 </head>
 <body>
+
+<!-- BANNIÈRE DE LOCALISATION -->
+<div class="geo-banner" id="geoBanner">
+    <div class="geo-banner-left">
+        <span>📍</span>
+        <span>Géolocalisation</span>
+        <span id="geoDot" class="geo-dot geo-dot-inactive"></span>
+        <span id="geoStatus" class="geo-status-text">Non localisé</span>
+    </div>
+    <div>
+        <button class="geo-banner-btn" id="geoLocateBtn">📍 Me localiser</button>
+        <button class="geo-banner-btn geo-banner-btn-primary" id="geoViewMapBtn">🗺️ Voir sur la carte</button>
+    </div>
+</div>
 
 <header>
   <a href="#" class="logo"><span class="ldot"></span>AI/DIRECTORY</a>
@@ -282,11 +350,105 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
-// DONNÉES — 200+ IAs
-// cens: 0=Très strict, 1=Modéré, 2=Léger, 3=Non censuré
-// dep: local | cloud | web | app | api
-// ═══════════════════════════════════════════════
+// ==================== GÉOLOCALISATION ====================
+(function() {
+    const dot = document.getElementById('geoDot');
+    const statusSpan = document.getElementById('geoStatus');
+    const locateBtn = document.getElementById('geoLocateBtn');
+    const mapBtn = document.getElementById('geoViewMapBtn');
+    
+    // Vérifier si une position est déjà stockée
+    function updateUI() {
+        const lat = sessionStorage.getItem('userLat');
+        if (lat) {
+            dot.className = 'geo-dot geo-dot-active';
+            const latShort = parseFloat(lat).toFixed(4);
+            const lonShort = parseFloat(sessionStorage.getItem('userLon')).toFixed(4);
+            statusSpan.innerHTML = `📍 Localisé (${latShort}, ${lonShort})`;
+        } else {
+            dot.className = 'geo-dot geo-dot-inactive';
+            statusSpan.innerHTML = '📍 Non localisé';
+        }
+    }
+    
+    // Demander la localisation
+    function askLocation() {
+        if (!navigator.geolocation) {
+            alert("❌ Votre navigateur ne supporte pas la géolocalisation");
+            return;
+        }
+        
+        locateBtn.disabled = true;
+        locateBtn.textContent = "⏳ Localisation...";
+        
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const acc = position.coords.accuracy;
+                
+                // Stocker
+                sessionStorage.setItem('userLat', lat);
+                sessionStorage.setItem('userLon', lon);
+                sessionStorage.setItem('userAcc', acc);
+                sessionStorage.setItem('userLocTime', Date.now());
+                
+                updateUI();
+                locateBtn.disabled = false;
+                locateBtn.textContent = "📍 Me localiser";
+                
+                console.log(`✅ Position stockée: ${lat}, ${lon} (±${acc}m)`);
+                alert(`✅ Position enregistrée !\nLatitude: ${lat.toFixed(6)}\nLongitude: ${lon.toFixed(6)}\nPrécision: ±${Math.round(acc)}m`);
+            },
+            (error) => {
+                let msg = "";
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        msg = "Permission refusée. Autorisez l'accès à votre position.";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        msg = "Position indisponible. Vérifiez votre GPS/Wi-Fi.";
+                        break;
+                    case error.TIMEOUT:
+                        msg = "Délai dépassé. Réessayez.";
+                        break;
+                    default:
+                        msg = "Erreur inconnue.";
+                }
+                alert("❌ " + msg);
+                locateBtn.disabled = false;
+                locateBtn.textContent = "📍 Me localiser";
+            },
+            { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+        );
+    }
+    
+    // Aller à la carte
+    function goToMap() {
+        const hasLocation = sessionStorage.getItem('userLat') !== null;
+        if (hasLocation) {
+            window.location.href = 'carte.html';
+        } else {
+            const confirm = window.confirm("Vous n'avez pas encore partagé votre position. Voulez-vous le faire maintenant ?");
+            if (confirm) {
+                askLocation();
+                // Attendre un peu puis rediriger
+                setTimeout(() => {
+                    if (sessionStorage.getItem('userLat')) {
+                        window.location.href = 'carte.html';
+                    }
+                }, 3000);
+            }
+        }
+    }
+    
+    locateBtn.addEventListener('click', askLocation);
+    mapBtn.addEventListener('click', goToMap);
+    
+    updateUI();
+})();
+
+// ==================== DONNÉES IA ====================
 const AIS=[
 // ── ASSISTANTS ──
 {id:1,n:"ChatGPT",l:"chat.openai.com",d:"Chatbots",t:"Texte",desc:"Le plus utilisé au monde. GPT-4o gère texte, images, voix, code et fichiers.",p:"Freemium",u:"https://chat.openai.com",s:"Polyvalence totale, GPT-4o, vision, plugins, voix",w:"Censure agressive, hallucinations",r:9.2,g:["OpenAI","GPT-4o","Multimodal","Voix"],cens:0,dep:["web","app","api"],plat:["Web","iOS","Android","API"]},
@@ -461,7 +623,7 @@ const AIS=[
 {id:141,n:"Anima AI",l:"myanima.ai",d:"Compagnons IA",t:"Texte",desc:"Compagnon IA pour améliorer les compétences sociales et le bien-être.",p:"Freemium",u:"https://myanima.ai",s:"Compagnon, compétences sociales, bien-être",w:"Niche",r:7.4,g:["Compagnon","Social","Bien-être","Mobile"],cens:2,dep:["app"],plat:["iOS","Android"]},
 ];
 
-// ═══════════════ STATE ═══════════════
+// ==================== UI ====================
 const DOMS=["Tous",...[...new Set(AIS.map(a=>a.d))].sort()];
 const TYPS=["Tous",...[...new Set(AIS.map(a=>a.t))].sort()];
 const DEPS=[{k:"Local",v:"local"},{k:"Cloud",v:"cloud"},{k:"Web",v:"web"},{k:"App",v:"app"},{k:"API",v:"api"}];
@@ -474,19 +636,16 @@ const PC={Gratuit:"bgn",Freemium:"bbl",Payant:"bam"};
 const CLBL=["Très strict","Modéré","Léger","Non censuré"];
 const CCLS=["cens-0","cens-1","cens-2","cens-3"];
 
-// ═══════════════ BUILD UI ═══════════════
 function bld(){
-  // Sidebar domains
   const domCounts={};
   AIS.forEach(a=>{domCounts[a.d]=(domCounts[a.d]||0)+1});
-  const ICONS={"Chatbots":"💬","Raisonnement":"🧠","Modèles locaux":"🖥️","Images":"🎨","Vidéos":"🎬","Audio / Voix":"🎵","Code / Dev":"⌨️","Marketing":"📣","Productivité":"⚡","Agents IA":"🤖","Finances":"💰","Recrutement":"👥","E-commerce":"🛒","Éducation":"📚","Juridique":"⚖️","Santé & Bien-être":"❤️","Ventes":"📈","Service client":"🎧","Design":"🎯","Traduction":"🌐","Réseaux sociaux":"📱","SEO / Visibilité":"🔍","Sécurité":"🔒","Jeux":"🎮","Voyage & Tourisme":"✈️","Mode & Beauté":"👗","Spiritualité":"🌙","Recherche":"🔬","Compagnons IA":"🤝","Ventes":"💼"};
+  const ICONS={"Chatbots":"💬","Raisonnement":"🧠","Modèles locaux":"🖥️","Images":"🎨","Vidéos":"🎬","Audio / Voix":"🎵","Code / Dev":"⌨️","Marketing":"📣","Productivité":"⚡","Agents IA":"🤖","Finances":"💰","Recrutement":"👥","E-commerce":"🛒","Éducation":"📚","Juridique":"⚖️","Santé & Bien-être":"❤️","Ventes":"📈","Service client":"🎧","Design":"🎯","Traduction":"🌐","Réseaux sociaux":"📱","SEO / Visibilité":"🔍","Sécurité":"🔒","Jeux":"🎮","Voyage & Tourisme":"✈️","Mode & Beauté":"👗","Spiritualité":"🌙","Recherche":"🔬","Compagnons IA":"🤝"};
   document.getElementById("sb-doms").innerHTML=
     `<div class="sb-item${adom==="Tous"?" on":""}" onclick="sdom(this,'Tous')"><span class="sb-item-left"><span class="sb-icon">🌐</span>Tous</span><span class="sb-count">${AIS.length}</span></div>`+
     DOMS.filter(d=>d!=="Tous").map(d=>`<div class="sb-item${d===adom?" on":""}" onclick="sdom(this,'${d.replace(/'/g,"\\'")}')"><span class="sb-item-left"><span class="sb-icon">${ICONS[d]||"📦"}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d}</span></span><span class="sb-count">${domCounts[d]||0}</span></div>`).join("");
   document.getElementById("sb-deps").innerHTML=DEPS.map(dep=>`<div class="sb-item${adep===dep.v?" on":""}" onclick="sdep(this,'${dep.v}')"><span class="sb-item-left"><span class="sb-icon">${dep.v==="local"?"💻":dep.v==="cloud"?"☁️":dep.v==="web"?"🌐":dep.v==="app"?"📱":"🔌"}</span>${dep.k}</span></div>`).join("");
   document.getElementById("sb-cens").innerHTML=CENS.map(c=>`<div class="sb-item${acens===c.v?" on":""}" onclick="scens(this,${c.v})"><span class="sb-item-left"><span style="width:8px;height:8px;border-radius:50%;background:${["var(--co)","var(--am)","var(--or)","var(--gn)"][c.v]};display:inline-block;flex-shrink:0"></span>${c.k}</span></div>`).join("");
   document.getElementById("sb-price").innerHTML=PRICES.map(pr=>`<div class="sb-item${aprice===pr.v?" on":""}" onclick="sprice(this,'${pr.v}')"><span class="sb-item-left"><span class="sb-icon">${pr.v==="Gratuit"?"✅":pr.v==="Freemium"?"🔓":"💳"}</span>${pr.k}</span></div>`).join("");
-  // Types
   document.getElementById("typs").innerHTML=["Tous",...TYPS.filter(t=>t!=="Tous")].map(t=>`<span class="tag${t===atyp?" on":""}" onclick="styp(this,'${t}')">${t}</span>`).join("");
 }
 
@@ -609,7 +768,7 @@ function clM(){document.getElementById("ov").classList.remove("open")}
 function ovCl(e){if(e.target===document.getElementById("ov"))clM()}
 function ovCl2(e){if(e.target===document.getElementById("ov-quiz"))closeQuiz()}
 
-// ═══════════════ QUIZ ═══════════════
+// ==================== QUIZ ====================
 const QUIZ=[
   {q:"Quel est votre objectif principal ?",opts:["Créer du contenu (texte, images, vidéos)","Coder ou développer","Automatiser des tâches","Analyser des données","Apprendre ou se former","Gérer mon entreprise"]},
   {q:"Où voulez-vous utiliser l'IA ?",opts:["Sur le web (navigateur)","Sur mon ordinateur en local","Sur mobile","Via API / intégration","Peu importe"]},
@@ -633,19 +792,15 @@ function qSel(i){qAnswers[qStep]=i;renderQuiz()}
 function qNext(){if(qAnswers[qStep]!==undefined){qStep++;renderQuiz()}}
 function getRecos(){
   let filtered=[...AIS];
-  // Budget
   if(qAnswers[2]===0)filtered=filtered.filter(a=>a.p==="Gratuit");
   else if(qAnswers[2]===1)filtered=filtered.filter(a=>a.p!=="Payant");
-  // Déploiement
   if(qAnswers[1]===0)filtered=filtered.filter(a=>a.dep.includes("web"));
   else if(qAnswers[1]===1)filtered=filtered.filter(a=>a.dep.includes("local"));
   else if(qAnswers[1]===2)filtered=filtered.filter(a=>a.dep.includes("app"));
   else if(qAnswers[1]===3)filtered=filtered.filter(a=>a.dep.includes("api"));
-  // Objectif
   const domMap=[["Chatbots","Images","Vidéos","Audio / Voix","Design"],["Code / Dev"],["Agents IA","Productivité"],["Recherche","Finances"],["Éducation","Recherche"],["Productivité","Ventes","Marketing"]];
   const doms=domMap[qAnswers[0]]||[];
   if(doms.length)filtered=filtered.filter(a=>doms.some(d=>a.d.includes(d)));
-  // Tri par note
   return filtered.sort((a,b)=>b.r-a.r).slice(0,5);
 }
 
