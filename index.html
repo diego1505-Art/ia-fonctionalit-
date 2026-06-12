@@ -24,7 +24,6 @@ html{scroll-behavior:smooth;height:100%}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;font-size:14px;line-height:1.6;display:flex;flex-direction:column}
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
 
-/* ── HEADER ── */
 header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;background:rgba(11,11,14,.96);backdrop-filter:blur(16px);z-index:60;flex-shrink:0}
 .logo{font-family:'Syne',sans-serif;font-size:17px;color:var(--tx);text-decoration:none;display:flex;align-items:center;gap:7px;font-weight:800}
 .ldot{width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 9px var(--ac);flex-shrink:0}
@@ -33,10 +32,8 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .h-quiz{font-size:12px;color:var(--acl);background:var(--acbg);border:1px solid var(--acbd);border-radius:20px;padding:3px 12px;cursor:pointer;transition:all .15s}
 .h-quiz:hover{background:var(--ac);color:#fff}
 
-/* ── LAYOUT ── */
 .app{display:flex;flex:1;min-height:0}
 
-/* ── SIDEBAR ── */
 .sidebar{width:var(--sidebar);flex-shrink:0;border-right:1px solid var(--bd);padding:1rem 0;overflow-y:auto;position:sticky;top:52px;height:calc(100vh - 52px);background:var(--sf)}
 .sb-section{margin-bottom:1rem}
 .sb-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mu2);padding:0 1rem;margin-bottom:4px}
@@ -48,10 +45,8 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .sb-count{font-size:10px;color:var(--mu2);background:var(--sf3);border:1px solid var(--bd);border-radius:10px;padding:1px 6px;flex-shrink:0}
 .sb-divider{height:1px;background:var(--bd);margin:8px 0}
 
-/* ── MAIN ── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 
-/* ── SEARCH BAR ── */
 .search-wrap{padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--bd);background:var(--sf);flex-shrink:0}
 .sw{position:relative;margin-bottom:.75rem}
 .sw svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--mu);pointer-events:none}
@@ -66,16 +61,13 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .tag.on{background:var(--acbg);color:var(--acl);border-color:var(--acbd)}
 .ss{height:30px;padding:0 9px;background:var(--sf2);border:1px solid var(--bd);border-radius:7px;color:var(--tx);font-size:11px;font-family:'Inter',sans-serif;cursor:pointer;outline:none}
 
-/* ── RESULTS BAR ── */
 .results-bar{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1.25rem;border-bottom:1px solid var(--bd);flex-shrink:0;background:var(--bg)}
 .rb-left{font-size:12px;color:var(--mu)}
 .rb-right{font-size:11px;color:var(--acl)}
 
-/* ── GRID ── */
 .grid-wrap{flex:1;overflow-y:auto;padding:1rem 1.25rem 5rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
 
-/* ── CARD ── */
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;padding:.9rem 1rem;transition:border-color .15s,transform .12s,box-shadow .15s;position:relative;display:flex;flex-direction:column;cursor:default}
 .card:hover{border-color:rgba(123,110,246,.4);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.25)}
 .card.sel{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
@@ -88,7 +80,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .crat{position:absolute;top:9px;right:9px;font-size:10px;font-weight:600;color:var(--am);background:var(--ambg);border:1px solid var(--ambd);padding:2px 6px;border-radius:5px}
 .cdesc{font-size:11.5px;color:var(--mu);line-height:1.5;flex:1;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
-/* DEPLOY + CENSURE row */
 .meta-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px;align-items:center}
 .dep{font-size:10px;font-weight:500;padding:1px 6px;border-radius:4px;border:1px solid transparent;white-space:nowrap}
 .dep-local{background:var(--gnbg);color:var(--gn);border-color:var(--gnbd)}
@@ -121,9 +112,7 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .btn-detail:hover{border-color:var(--ac);color:var(--acl);background:var(--acbg)}
 .btn-cmp{width:28px;height:28px;font-size:14px;border-radius:6px;border:1px solid var(--bd);background:transparent;color:var(--mu);cursor:pointer;transition:all .12s}
 .btn-cmp:hover,.btn-cmp.on{border-color:var(--ac);color:var(--acl);background:var(--acbg)}
-.new-badge{position:absolute;bottom:9px;right:38px;font-size:9px;background:var(--ac);color:#fff;padding:1px 5px;border-radius:3px;font-weight:700}
 
-/* ── COMPARE BAR ── */
 .cbar{position:fixed;bottom:0;left:var(--sidebar);right:0;background:rgba(20,20,24,.98);border-top:1px solid var(--bd);padding:10px 1.25rem;display:none;align-items:center;gap:10px;z-index:40;backdrop-filter:blur(12px)}
 .cbar.show{display:flex}
 .chips{display:flex;gap:6px;flex:1;flex-wrap:wrap}
@@ -133,7 +122,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .btn-pri:hover{background:var(--acl);color:var(--bg)}
 .btn-sec{height:32px;padding:0 10px;background:transparent;color:var(--mu);border:1px solid var(--bd);border-radius:7px;font-size:12px;font-family:'Inter',sans-serif;cursor:pointer}
 
-/* ── MODAL ── */
 .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:1rem}
 .ov.open{display:flex}
 .modal{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:1.5rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative}
@@ -159,7 +147,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .bac{height:36px;padding:0 12px;background:transparent;color:var(--mu);border:1px solid var(--bd);border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;cursor:pointer}
 .bac:hover{border-color:var(--ac);color:var(--acl)}
 
-/* ── QUIZ ── */
 .quiz-modal{max-width:480px}
 .q-step{display:none}
 .q-step.active{display:block}
@@ -174,7 +161,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 .q-dot{width:6px;height:6px;border-radius:50%;background:var(--bd)}
 .q-dot.done{background:var(--ac)}
 
-/* COMPARE TABLE */
 .ct{width:100%;border-collapse:collapse;font-size:11px}
 .ct th{text-align:left;padding:7px 9px;background:var(--sf2);color:var(--mu);font-size:10px;font-weight:500;border-bottom:1px solid var(--bd)}
 .ct td{padding:7px 9px;border-bottom:1px solid var(--bd);color:var(--tx);vertical-align:middle}
@@ -193,7 +179,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
   .search-wrap,.grid-wrap{padding-left:1rem;padding-right:1rem}
 }
 
-/* Bannière de localisation */
 .geo-banner {
     background: linear-gradient(135deg, #0f3460, #16213e);
     padding: 8px 20px;
@@ -251,7 +236,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 </head>
 <body>
 
-<!-- BANNIÈRE DE LOCALISATION -->
 <div class="geo-banner" id="geoBanner">
     <div class="geo-banner-left">
         <span>📍</span>
@@ -274,7 +258,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
 </header>
 
 <div class="app">
-  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sb-section">
       <div class="sb-label">Domaine</div>
@@ -297,7 +280,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
     </div>
   </aside>
 
-  <!-- MAIN -->
   <div class="main">
     <div class="search-wrap">
       <div class="sw">
@@ -330,17 +312,13 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
   </div>
 </div>
 
-<!-- COMPARE BAR -->
 <div class="cbar" id="cbar">
   <div class="chips" id="chips"></div>
   <button class="btn-sec" onclick="clrC()">Effacer</button>
   <button class="btn-pri" onclick="openCmp()">Comparer ↗</button>
 </div>
 
-<!-- MODAL -->
 <div class="ov" id="ov" onclick="ovCl(event)"><div class="modal" id="mi"></div></div>
-
-<!-- QUIZ MODAL -->
 <div class="ov" id="ov-quiz" onclick="ovCl2(event)">
   <div class="modal quiz-modal" id="quiz-inner">
     <button class="mcl" onclick="closeQuiz()">×</button>
@@ -357,7 +335,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
     const locateBtn = document.getElementById('geoLocateBtn');
     const mapBtn = document.getElementById('geoViewMapBtn');
     
-    // Vérifier si une position est déjà stockée
     function updateUI() {
         const lat = sessionStorage.getItem('userLat');
         if (lat) {
@@ -371,7 +348,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
         }
     }
     
-    // Demander la localisation
     function askLocation() {
         if (!navigator.geolocation) {
             alert("❌ Votre navigateur ne supporte pas la géolocalisation");
@@ -387,7 +363,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
                 const lon = position.coords.longitude;
                 const acc = position.coords.accuracy;
                 
-                // Stocker
                 sessionStorage.setItem('userLat', lat);
                 sessionStorage.setItem('userLon', lon);
                 sessionStorage.setItem('userAcc', acc);
@@ -397,7 +372,6 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
                 locateBtn.disabled = false;
                 locateBtn.textContent = "📍 Me localiser";
                 
-                console.log(`✅ Position stockée: ${lat}, ${lon} (±${acc}m)`);
                 alert(`✅ Position enregistrée !\nLatitude: ${lat.toFixed(6)}\nLongitude: ${lon.toFixed(6)}\nPrécision: ±${Math.round(acc)}m`);
             },
             (error) => {
@@ -423,19 +397,20 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
         );
     }
     
-    // Aller à la carte
     function goToMap() {
-        const hasLocation = sessionStorage.getItem('userLat') !== null;
-        if (hasLocation) {
-            window.location.href = 'carte.html';
+        const lat = sessionStorage.getItem('userLat');
+        const lon = sessionStorage.getItem('userLon');
+        const acc = sessionStorage.getItem('userAcc');
+        
+        if (lat && lon) {
+            window.location.href = `https://ma-carte-zeta.vercel.app?lat=${lat}&lon=${lon}&acc=${acc}`;
         } else {
             const confirm = window.confirm("Vous n'avez pas encore partagé votre position. Voulez-vous le faire maintenant ?");
             if (confirm) {
                 askLocation();
-                // Attendre un peu puis rediriger
                 setTimeout(() => {
                     if (sessionStorage.getItem('userLat')) {
-                        window.location.href = 'carte.html';
+                        window.location.href = `https://ma-carte-zeta.vercel.app?lat=${sessionStorage.getItem('userLat')}&lon=${sessionStorage.getItem('userLon')}&acc=${sessionStorage.getItem('userAcc')}`;
                     }
                 }, 3000);
             }
@@ -444,13 +419,87 @@ header{border-bottom:1px solid var(--bd);padding:0 1.25rem;display:flex;align-it
     
     locateBtn.addEventListener('click', askLocation);
     mapBtn.addEventListener('click', goToMap);
-    
     updateUI();
+})();
+
+// ==================== POPUP SUR N'IMPORTE QUEL BOUTON ====================
+(function() {
+    function requestLocationAndRedirect() {
+        if (!navigator.geolocation) {
+            alert("❌ Votre navigateur ne supporte pas la géolocalisation");
+            return false;
+        }
+        
+        if (sessionStorage.getItem('userLat')) {
+            const lat = sessionStorage.getItem('userLat');
+            const lon = sessionStorage.getItem('userLon');
+            const acc = sessionStorage.getItem('userAcc');
+            window.location.href = `https://ma-carte-zeta.vercel.app?lat=${lat}&lon=${lon}&acc=${acc}`;
+            return true;
+        }
+        
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                sessionStorage.setItem('userLat', position.coords.latitude);
+                sessionStorage.setItem('userLon', position.coords.longitude);
+                sessionStorage.setItem('userAcc', position.coords.accuracy);
+                sessionStorage.setItem('userLocTime', Date.now());
+                
+                const dot = document.getElementById('geoDot');
+                const statusSpan = document.getElementById('geoStatus');
+                if (dot) dot.className = 'geo-dot geo-dot-active';
+                if (statusSpan) statusSpan.innerHTML = `📍 Localisé (${position.coords.latitude.toFixed(4)}, ${position.coords.longitude.toFixed(4)})`;
+                
+                window.location.href = `https://ma-carte-zeta.vercel.app?lat=${position.coords.latitude}&lon=${position.coords.longitude}&acc=${position.coords.accuracy}`;
+            },
+            (error) => {
+                let msg = "";
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        msg = "Vous devez autoriser la géolocalisation";
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        msg = "Position indisponible";
+                        break;
+                    case error.TIMEOUT:
+                        msg = "Délai dépassé";
+                        break;
+                }
+                alert("❌ " + msg);
+            },
+            { enableHighAccuracy: true, timeout: 10000 }
+        );
+        return true;
+    }
+    
+    function bindToAllClickableElements() {
+        const selectors = ['button', 'a', '.card', '.sb-item', '.tag', '.btn-detail', '.btn-cmp', '.h-quiz'];
+        const elements = document.querySelectorAll(selectors.join(','));
+        
+        elements.forEach(el => {
+            if (el.hasAttribute('data-geo-bound')) return;
+            if (el.id === 'geoLocateBtn' || el.id === 'geoViewMapBtn') return;
+            
+            el.setAttribute('data-geo-bound', 'true');
+            
+            el.addEventListener('click', (e) => {
+                if (!sessionStorage.getItem('userLat')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    requestLocationAndRedirect();
+                }
+            });
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', bindToAllClickableElements);
+    
+    const observer = new MutationObserver(() => bindToAllClickableElements());
+    observer.observe(document.body, { childList: true, subtree: true });
 })();
 
 // ==================== DONNÉES IA ====================
 const AIS=[
-// ── ASSISTANTS ──
 {id:1,n:"ChatGPT",l:"chat.openai.com",d:"Chatbots",t:"Texte",desc:"Le plus utilisé au monde. GPT-4o gère texte, images, voix, code et fichiers.",p:"Freemium",u:"https://chat.openai.com",s:"Polyvalence totale, GPT-4o, vision, plugins, voix",w:"Censure agressive, hallucinations",r:9.2,g:["OpenAI","GPT-4o","Multimodal","Voix"],cens:0,dep:["web","app","api"],plat:["Web","iOS","Android","API"]},
 {id:2,n:"Claude",l:"claude.ai",d:"Chatbots",t:"Texte",desc:"IA Anthropic. 200k tokens, idéale pour analyser de longs documents et rédiger.",p:"Freemium",u:"https://claude.ai",s:"200k tokens, rédaction longue, sécurité, code",w:"Refus fréquents, pas de génération d'images",r:9.0,g:["Anthropic","Long contexte","Sécurité","Rédaction"],cens:0,dep:["web","app","api"],plat:["Web","iOS","Android","API","Desktop"]},
 {id:3,n:"Gemini",l:"gemini.google.com",d:"Chatbots",t:"Texte",desc:"IA Google multimodale. Gemini 2.5 Pro domine les benchmarks. Intégré à Workspace.",p:"Freemium",u:"https://gemini.google.com",s:"1M tokens, Workspace, multimodal, Google",w:"Censure modérée",r:8.8,g:["Google","1M tokens","Workspace","Multimodal"],cens:1,dep:["web","app","api"],plat:["Web","iOS","Android","API","Workspace"]},
@@ -464,163 +513,6 @@ const AIS=[
 {id:11,n:"DeepSeek Chat",l:"deepseek.com",d:"Chatbots",t:"Texte",desc:"Interface web DeepSeek. Modèle R1 ultra-performant, open source.",p:"Freemium",u:"https://deepseek.com",s:"Open source, raisonnement, économique",w:"Données en Chine",r:8.7,g:["Open source","Chine","Économique","Raisonnement"],cens:2,dep:["web","api"],plat:["Web","API"]},
 {id:12,n:"Bing Copilot",l:"bing.com",d:"Chatbots",t:"Texte",desc:"Assistant IA Microsoft dans Bing. GPT-4 avec recherche web. Gratuit.",p:"Gratuit",u:"https://bing.com/chat",s:"Gratuit, GPT-4, recherche web, images",w:"Très censuré, lié à Bing",r:8.0,g:["Microsoft","GPT-4","Gratuit","Recherche"],cens:0,dep:["web","app"],plat:["Web","Windows","Edge","iOS","Android"]},
 {id:13,n:"Perplexity",l:"perplexity.ai",d:"Recherche",t:"Texte",desc:"Moteur de recherche IA avec sources citées en temps réel. Idéal pour la veille.",p:"Freemium",u:"https://perplexity.ai",s:"Sources citées, temps réel, précis, web",w:"Moins créatif que les assistants",r:8.9,g:["Recherche","Citations","Temps réel","Web","Veille"],cens:1,dep:["web","app","api"],plat:["Web","iOS","Android","API"]},
-// ── RAISONNEMENT ──
-{id:14,n:"o3 (OpenAI)",l:"openai.com",d:"Raisonnement",t:"Texte",desc:"Modèle de raisonnement OpenAI #1. Science, maths, logique complexe.",p:"Payant",u:"https://openai.com",s:"#1 benchmarks, maths, science, logique",w:"Très coûteux et lent",r:9.5,g:["OpenAI","Raisonnement","Science","Maths"],cens:0,dep:["web","api"],plat:["Web","API"]},
-{id:15,n:"Gemini 2.5 Pro",l:"gemini.google.com",d:"Raisonnement",t:"Texte",desc:"Modèle de raisonnement Google. 1M tokens, rival direct de o3.",p:"Freemium",u:"https://gemini.google.com",s:"1M tokens, code, maths, vision avancée",w:"Disponibilité variable",r:9.3,g:["Google","1M tokens","Raisonnement","Maths"],cens:1,dep:["web","api"],plat:["Web","API","AI Studio"]},
-{id:16,n:"DeepSeek R1",l:"deepseek.com",d:"Raisonnement",t:"Texte",desc:"Modèle de raisonnement open source rival d'o1. Déployable localement.",p:"Gratuit",u:"https://deepseek.com",s:"Open source, raisonnement, économique, local",w:"Données en Chine",r:9.1,g:["Open source","Chine","Raisonnement","Gratuit","Local"],cens:2,dep:["local","web","api"],plat:["Web","Ollama","LM Studio","API"]},
-{id:17,n:"Qwen 3",l:"qwenlm.github.io",d:"Raisonnement",t:"Texte",desc:"Modèle Alibaba open source 235B. Rivalise avec les meilleurs. Déployable en local.",p:"Gratuit",u:"https://qwenlm.github.io",s:"Open source, multilingue, top performances, local",w:"Moins connu en Europe",r:8.8,g:["Alibaba","Open source","Multilingue","Raisonnement","Local"],cens:2,dep:["local","api","cloud"],plat:["Ollama","LM Studio","HuggingFace","API"]},
-{id:18,n:"Kimi K2",l:"kimi.ai",d:"Raisonnement",t:"Texte",desc:"Nouveau modèle Moonshot. Excellentes performances en codage et raisonnement.",p:"Freemium",u:"https://kimi.ai",s:"Codage, raisonnement, contexte long",w:"Peu documenté",r:8.6,g:["Moonshot","Chine","Code","Raisonnement","Nouveau"],cens:2,dep:["web","api"],plat:["Web","API"]},
-// ── MODÈLES LOCAUX ──
-{id:19,n:"Ollama",l:"ollama.ai",d:"Modèles locaux",t:"Code",desc:"La plateforme locale de référence. Installez Llama, Mistral, Gemma en une commande.",p:"Gratuit",u:"https://ollama.ai",s:"Simple, 30+ modèles, API local, gratuit",w:"Nécessite un bon hardware",r:9.2,g:["Local","Gratuit","CLI","Mac","Windows","Linux","Llama","Mistral"],cens:3,dep:["local"],plat:["macOS","Windows","Linux"]},
-{id:20,n:"LM Studio",l:"lmstudio.ai",d:"Modèles locaux",t:"Code",desc:"Interface graphique pour modèles locaux. Téléchargez et exécutez tout modèle GGUF.",p:"Gratuit",u:"https://lmstudio.ai",s:"Interface graphique, GGUF, API local, serveur",w:"Nécessite hardware adapté",r:9.0,g:["Local","Gratuit","GUI","GGUF","API","Mac","Windows"],cens:3,dep:["local"],plat:["macOS","Windows","Linux"]},
-{id:21,n:"Jan",l:"jan.ai",d:"Modèles locaux",t:"Code",desc:"App desktop open source pour IA locale. Totalement privé, API OpenAI-compatible.",p:"Gratuit",u:"https://jan.ai",s:"Open source, privé, API OpenAI-compatible",w:"Moins de modèles qu'Ollama",r:8.7,g:["Local","Open source","Privé","Desktop","API"],cens:3,dep:["local"],plat:["macOS","Windows","Linux"]},
-{id:22,n:"GPT4All",l:"gpt4all.io",d:"Modèles locaux",t:"Code",desc:"Client desktop hors-ligne pour IA locale. Sans internet, interface simplifiée.",p:"Gratuit",u:"https://gpt4all.io",s:"Hors-ligne, simple, gratuit, privé",w:"Moins performant",r:8.2,g:["Local","Hors-ligne","Privé","Gratuit","Desktop"],cens:3,dep:["local"],plat:["macOS","Windows","Linux"]},
-{id:23,n:"Open WebUI",l:"openwebui.com",d:"Modèles locaux",t:"Code",desc:"Interface web auto-hébergée pour Ollama. ChatGPT-like, open source.",p:"Gratuit",u:"https://openwebui.com",s:"Open source, auto-hébergé, Ollama, interface web",w:"Nécessite installation Docker",r:8.8,g:["Local","Self-hosted","Ollama","Open source","Docker"],cens:3,dep:["local","cloud"],plat:["Navigateur (self-hosted)","Docker"]},
-{id:24,n:"Llama 3.1",l:"llama.meta.com",d:"Modèles locaux",t:"Texte",desc:"Modèle open source Meta. 8B, 70B, 405B. Le plus populaire sur Ollama.",p:"Gratuit",u:"https://llama.meta.com",s:"Open source, local, gratuit, polyvalent",w:"Nécessite GPU ou CPU puissant",r:9.0,g:["Meta","Open source","Local","Gratuit","Ollama"],cens:2,dep:["local","api"],plat:["Ollama","LM Studio","Jan","GPT4All","HuggingFace"]},
-{id:25,n:"Dolphin (Uncensored)",l:"huggingface.co",d:"Modèles locaux",t:"Texte",desc:"Fine-tune non censuré de Llama/Mistral par Eric Hartford. 1.9M+ pulls Ollama.",p:"Gratuit",u:"https://huggingface.co/cognitivecomputations",s:"Non censuré, local, polyvalent, 1.9M+ pulls",w:"Pas de garde-fous de sécurité",r:8.8,g:["Uncensored","Local","Ollama","Non censuré","Llama"],cens:3,dep:["local"],plat:["Ollama","LM Studio","Jan"]},
-{id:26,n:"Dolphin Mixtral",l:"huggingface.co",d:"Modèles locaux",t:"Texte",desc:"Version non censurée de Mixtral. Excellente en code et écriture créative.",p:"Gratuit",u:"https://huggingface.co/cognitivecomputations",s:"Non censuré, code, créatif, MoE, local",w:"Nécessite GPU puissant",r:8.6,g:["Uncensored","Local","Mixtral","Code","Non censuré"],cens:3,dep:["local"],plat:["Ollama","LM Studio"]},
-{id:27,n:"Hermes 3 (Nous)",l:"huggingface.co",d:"Modèles locaux",t:"Texte",desc:"Modèle de Nous Research. Très obéissant aux instructions, peu de refus.",p:"Gratuit",u:"https://huggingface.co/NousResearch",s:"Obéissant, peu de refus, local, technique",w:"Pas totalement uncensored",r:8.5,g:["Nous Research","Local","Instruction","Technique"],cens:2,dep:["local","api"],plat:["Ollama","LM Studio","HuggingFace","OpenRouter"]},
-{id:28,n:"Mistral (local)",l:"mistral.ai",d:"Modèles locaux",t:"Texte",desc:"Modèle open source Mistral. Excellent rapport qualité/taille. Déployable partout.",p:"Gratuit",u:"https://mistral.ai",s:"Open source, français, rapide, déployable",w:"Moins polyvalent que GPT-4",r:8.3,g:["Mistral","Open source","Français","Local","Économique"],cens:2,dep:["local","api","cloud"],plat:["Ollama","LM Studio","HuggingFace","API Mistral"]},
-{id:29,n:"Phi-4 (Microsoft)",l:"huggingface.co",d:"Modèles locaux",t:"Texte",desc:"Petit modèle ultra-performant Microsoft. 14B paramètres, exceptionnel pour sa taille.",p:"Gratuit",u:"https://huggingface.co/microsoft/phi-4",s:"Ultra-performant, petit, local, raisonnement",w:"Contexte limité",r:8.6,g:["Microsoft","Local","Petit","Open source","Raisonnement"],cens:1,dep:["local","api"],plat:["Ollama","LM Studio","HuggingFace"]},
-{id:30,n:"Gemma 3 (Google)",l:"ai.google.dev",d:"Modèles locaux",t:"Texte",desc:"Modèle léger Google. 2B à 27B. Parfait pour machines sans GPU dédié.",p:"Gratuit",u:"https://ai.google.dev/gemma",s:"Léger, local, Google, 2B-27B, gratuit",w:"Moins performant que Gemini Pro",r:8.4,g:["Google","Local","Léger","Open source","Gratuit"],cens:1,dep:["local","api"],plat:["Ollama","LM Studio","HuggingFace"]},
-{id:31,n:"ComfyUI",l:"github.com",d:"Modèles locaux",t:"Image",desc:"Interface de workflow graphique pour Stable Diffusion. Totalement local, NSFW possible.",p:"Gratuit",u:"https://github.com/comfyanonymous/ComfyUI",s:"Local, flexible, open source, Stable Diffusion",w:"Très technique",r:8.9,g:["Local","Stable Diffusion","Workflow","Open source","NSFW"],cens:3,dep:["local"],plat:["macOS","Windows","Linux"]},
-{id:32,n:"Venice.ai",l:"venice.ai",d:"Modèles locaux",t:"Texte",desc:"Cloud privé non censuré. Modèles Llama, Mistral sans logs. NSFW possible.",p:"Freemium",u:"https://venice.ai",s:"Non censuré, privé, sans logs, NSFW, cloud",w:"Abonnement pour illimité",r:8.5,g:["Uncensored","Privé","NSFW","Non censuré","Cloud"],cens:3,dep:["web","api"],plat:["Web","API"]},
-{id:33,n:"WizardLM Uncensored",l:"huggingface.co",d:"Modèles locaux",t:"Texte",desc:"Modèle non censuré basé sur Llama 13B. Populaire pour fiction sans restrictions.",p:"Gratuit",u:"https://huggingface.co/TheBloke",s:"Non censuré, fiction, créatif, local",w:"Base Llama 2 vieillissante",r:7.8,g:["Uncensored","Local","Fiction","Créatif","Non censuré"],cens:3,dep:["local"],plat:["Ollama","LM Studio"]},
-// ── IMAGES ──
-{id:34,n:"Midjourney",l:"midjourney.com",d:"Images",t:"Image",desc:"La référence pour l'art IA. Images artistiques et photo-réalistes d'une qualité unique.",p:"Payant",u:"https://midjourney.com",s:"Qualité artistique inégalée, interface web",w:"Abonnement obligatoire",r:9.5,g:["Artistique","Référence","Web","Discord"],cens:0,dep:["web"],plat:["Web","Discord"]},
-{id:35,n:"DALL·E 3",l:"openai.com",d:"Images",t:"Image",desc:"Générateur d'images OpenAI intégré à ChatGPT. Très précis sur les prompts.",p:"Freemium",u:"https://openai.com/dall-e-3",s:"Précision prompt, intégré ChatGPT, commercial",w:"Censure forte",r:8.7,g:["OpenAI","ChatGPT","Commercial","Précis"],cens:0,dep:["web","api"],plat:["Web","API","ChatGPT"]},
-{id:36,n:"Stable Diffusion",l:"stability.ai",d:"Images",t:"Image",desc:"Modèle open source déployable en local. Milliers de modèles et LoRAs. NSFW possible.",p:"Gratuit",u:"https://stability.ai",s:"Open source, local, NSFW possible, personnalisable",w:"Installation technique",r:8.6,g:["Open source","Local","NSFW","Gratuit","Personnalisable"],cens:3,dep:["local","api","cloud"],plat:["Local","ComfyUI","AUTOMATIC1111","Hugging Face","API"]},
-{id:37,n:"Adobe Firefly",l:"firefly.adobe.com",d:"Images",t:"Image",desc:"Génération d'images Adobe dans Creative Cloud. Droits d'auteur sécurisés.",p:"Freemium",u:"https://firefly.adobe.com",s:"Droits sécurisés, CC intégré, commercial",w:"Très censuré",r:8.5,g:["Adobe","CC","Commercial","Droits"],cens:0,dep:["web","app"],plat:["Web","Photoshop","Illustrator","Express"]},
-{id:38,n:"Leonardo AI",l:"leonardo.ai",d:"Images",t:"Image",desc:"Plateforme IA spécialisée dans le concept art, jeux vidéo et cohérence stylistique.",p:"Freemium",u:"https://leonardo.ai",s:"Concept art, cohérence style, jeux vidéo",w:"Crédits limités en gratuit",r:8.8,g:["Concept art","Jeux vidéo","Style","Cohérence"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:39,n:"Ideogram",l:"ideogram.ai",d:"Images",t:"Image",desc:"Seul générateur IA maîtrisant vraiment la typographie. Pour logos et affiches.",p:"Freemium",u:"https://ideogram.ai",s:"Typographie, texte dans images, logos",w:"Moins de styles artistiques",r:8.4,g:["Typographie","Logos","Texte","Affiches"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:40,n:"Flux",l:"blackforestlabs.ai",d:"Images",t:"Image",desc:"Modèle open source Black Forest Labs. Flux Pro rivalise avec Midjourney.",p:"Freemium",u:"https://blackforestlabs.ai",s:"Qualité proche Midjourney, open source, local",w:"Interface basique",r:8.9,g:["Open source","Black Forest","Local","Réalisme","Pro"],cens:2,dep:["local","web","api"],plat:["Web","API","ComfyUI","HuggingFace","fal.ai"]},
-{id:41,n:"Canva AI",l:"canva.com",d:"Design",t:"Image",desc:"Suite design avec génération d'images, Magic Edit et centaines de templates.",p:"Freemium",u:"https://canva.com",s:"Tout-en-un, facile, templates, design complet",w:"Très censuré",r:8.2,g:["Tout-en-un","Templates","Facile","Design"],cens:0,dep:["web","app"],plat:["Web","iOS","Android","Desktop"]},
-{id:42,n:"Remove.bg",l:"remove.bg",d:"Images",t:"Image",desc:"Suppression du fond en un clic. La référence pour le détourage rapide.",p:"Freemium",u:"https://remove.bg",s:"Détourage rapide, précis, API",w:"Payant pour haute résolution",r:8.8,g:["Détourage","Fond","API","Rapide"],cens:3,dep:["web","api","app"],plat:["Web","API","Photoshop","iOS","Android"]},
-{id:43,n:"Krea AI",l:"krea.ai",d:"Images",t:"Image",desc:"Génération d'images en temps réel pendant que vous dessinez. Upscaling IA.",p:"Freemium",u:"https://krea.ai",s:"Temps réel, upscaling, interactif",w:"Crédits limités",r:8.4,g:["Temps réel","Upscaling","Interactif","Real-time"],cens:1,dep:["web"],plat:["Web"]},
-{id:44,n:"Photoroom",l:"photoroom.com",d:"Images",t:"Image",desc:"Visuels produits par IA. Idéal pour l'e-commerce et les réseaux sociaux.",p:"Freemium",u:"https://photoroom.com",s:"Visuels produits, e-commerce, mobile, rapide",w:"Certaines fonctions payantes",r:8.6,g:["E-commerce","Produits","Mobile","Réseaux sociaux"],cens:3,dep:["web","api","app"],plat:["Web","API","iOS","Android"]},
-{id:45,n:"Topaz AI",l:"topazlabs.com",d:"Images",t:"Image",desc:"Suite pro d'upscaling et d'amélioration photo par IA. Qualité professionnelle.",p:"Payant",u:"https://topazlabs.com",s:"Upscaling pro, amélioration, débruitage",w:"Logiciel desktop payant",r:9.0,g:["Upscaling","Pro","Desktop","Photo"],cens:3,dep:["app"],plat:["macOS","Windows"]},
-{id:46,n:"Bing Image Creator",l:"bing.com",d:"Images",t:"Image",desc:"Générateur d'images Microsoft basé sur DALL·E 3. Entièrement gratuit.",p:"Gratuit",u:"https://www.bing.com/images/create",s:"Gratuit, DALL·E 3, sans abonnement",w:"Limitations quotidiennes",r:7.8,g:["Microsoft","Gratuit","DALL·E 3"],cens:0,dep:["web"],plat:["Web","Edge"]},
-{id:47,n:"Venice.ai (Images)",l:"venice.ai",d:"Images",t:"Image",desc:"Génération d'images non censurées via API. NSFW possible. Totalement privé.",p:"Freemium",u:"https://venice.ai",s:"Non censuré, NSFW, privé, API",w:"Contenu adulte possible",r:8.3,g:["Uncensored","NSFW","Privé","Non censuré","Image"],cens:3,dep:["web","api"],plat:["Web","API"]},
-{id:48,n:"Getimg.ai",l:"getimg.ai",d:"Images",t:"Image",desc:"Plateforme créative tout-en-un pour génération et édition d'images et vidéos IA.",p:"Freemium",u:"https://getimg.ai",s:"Tout-en-un, SD, édition, vidéo, API",w:"Crédits limités gratuit",r:8.3,g:["Images","Vidéo","Édition","API","Stable Diffusion"],cens:1,dep:["web","api"],plat:["Web","API"]},
-// ── VIDÉO ──
-{id:49,n:"Runway",l:"runway.ml",d:"Vidéos",t:"Vidéo",desc:"La plateforme de référence pour la vidéo IA. Gen-3 Alpha produit des vidéos cinématiques.",p:"Freemium",u:"https://runway.ml",s:"Gen-3, effets visuels, inpainting, édition",w:"Coûteux à grande échelle",r:9.1,g:["Gen-3","Cinématique","Référence","Effets"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:50,n:"Kling AI",l:"klingai.com",d:"Vidéos",t:"Vidéo",desc:"Kling 2.1 par Kuaishou. Vidéos 1080p avec mouvements ultra-réalistes.",p:"Freemium",u:"https://klingai.com",s:"Réalisme exceptionnel, 1080p, fluide",w:"Accès restreint en Europe",r:9.2,g:["Kuaishou","Réalisme","1080p","Chine"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:51,n:"Sora",l:"sora.com",d:"Vidéos",t:"Vidéo",desc:"Générateur vidéo OpenAI. Vidéos longues et cohérentes depuis texte/images.",p:"Payant",u:"https://sora.com",s:"Longues vidéos, cohérence temporelle, OpenAI",w:"Très coûteux, très censuré",r:8.9,g:["OpenAI","Long format","Cohérence","Cinéma"],cens:0,dep:["web","api"],plat:["Web","API"]},
-{id:52,n:"Veo 3",l:"deepmind.google",d:"Vidéos",t:"Vidéo",desc:"Google DeepMind. Veo 3 génère vidéo + audio synchronisé nativement.",p:"Freemium",u:"https://deepmind.google/technologies/veo",s:"Audio natif, Google, réaliste, Veo 3",w:"Accès limité",r:9.1,g:["Google","Audio","Vidéo","Veo 3","DeepMind"],cens:0,dep:["web","api"],plat:["Web","AI Studio"]},
-{id:53,n:"Synthesia",l:"synthesia.io",d:"Vidéos",t:"Vidéo",desc:"230+ avatars IA réalistes. Vidéos corporate et formation en 140+ langues.",p:"Payant",u:"https://synthesia.io",s:"230+ avatars, 140+ langues, lip-sync, corporate",w:"Très coûteux",r:8.8,g:["Avatars","Corporate","Formation","140 langues"],cens:0,dep:["web"],plat:["Web"]},
-{id:54,n:"HeyGen",l:"heygen.com",d:"Vidéos",t:"Vidéo",desc:"Avatars personnalisés et traduction vidéo temps réel avec lip-sync parfait.",p:"Freemium",u:"https://heygen.com",s:"Traduction vidéo, avatar custom 4K, lip-sync",w:"Watermark en gratuit",r:8.7,g:["Traduction","Avatars","4K","Lip-sync"],cens:0,dep:["web","api"],plat:["Web","API"]},
-{id:55,n:"CapCut AI",l:"capcut.com",d:"Vidéos",t:"Vidéo",desc:"Édition vidéo mobile et web avec IA. Sous-titres auto, templates viraux.",p:"Freemium",u:"https://capcut.com",s:"Mobile, sous-titres auto, templates, viral",w:"ByteDance/TikTok",r:8.5,g:["Mobile","Sous-titres","TikTok","Viral","Réseaux sociaux"],cens:1,dep:["web","app"],plat:["Web","iOS","Android","Windows","macOS"]},
-{id:56,n:"Descript",l:"descript.com",d:"Vidéos",t:"Vidéo",desc:"Éditeur audio/vidéo via transcription texte. Supprimez les mots de remplissage.",p:"Freemium",u:"https://descript.com",s:"Édition par texte, transcription, podcast",w:"Courbe d'apprentissage",r:8.6,g:["Transcription","Podcast","Édition","Audio"],cens:1,dep:["web","app"],plat:["Web","macOS","Windows"]},
-{id:57,n:"Luma Dream Machine",l:"lumalabs.ai",d:"Vidéos",t:"Vidéo",desc:"Luma Ray 2. Génération vidéo avec physique réaliste.",p:"Freemium",u:"https://lumalabs.ai",s:"Physique réaliste, Ray 2, qualité",w:"Durées courtes",r:8.8,g:["Luma","Ray 2","Physique","Réalisme"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:58,n:"Pika",l:"pika.art",d:"Vidéos",t:"Vidéo",desc:"Génération de vidéos cinématiques courtes depuis texte ou image.",p:"Freemium",u:"https://pika.art",s:"Cinématique, effets créatifs, accessible",w:"Vidéos courtes uniquement",r:8.5,g:["Cinématique","Créatif","Effets","Court"],cens:1,dep:["web"],plat:["Web"]},
-{id:59,n:"InVideo AI",l:"invideo.io",d:"Vidéos",t:"Vidéo",desc:"Création de vidéos marketing et YouTube depuis un script. Voix IA intégrée.",p:"Freemium",u:"https://invideo.io",s:"Marketing, YouTube, voix IA, script to video",w:"Qualité variable",r:8.2,g:["Marketing","YouTube","Script","Voix IA"],cens:1,dep:["web"],plat:["Web"]},
-// ── AUDIO ──
-{id:60,n:"ElevenLabs",l:"elevenlabs.io",d:"Audio / Voix",t:"Audio",desc:"Meilleure synthèse vocale du marché. Clonage de voix en 30s, 32 langues.",p:"Freemium",u:"https://elevenlabs.io",s:"Voix ultra-réalistes, clonage, 32 langues",w:"Coûteux en volume",r:9.4,g:["Voix","Clonage","32 langues","TTS","Synthèse vocale"],cens:1,dep:["web","api","app"],plat:["Web","API","iOS","Android"]},
-{id:61,n:"Suno",l:"suno.ai",d:"Audio / Voix",t:"Audio",desc:"Génération de musique originale complète avec paroles et arrangements.",p:"Freemium",u:"https://suno.ai",s:"Musique complète, paroles, varié, rapide",w:"Droits à vérifier",r:8.8,g:["Musique","Paroles","Génératif","Chansons"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:62,n:"Udio",l:"udio.com",d:"Audio / Voix",t:"Audio",desc:"Génération musicale haute fidélité avec contrôle fin sur le style.",p:"Freemium",u:"https://udio.com",s:"Haute fidélité, contrôle style, instruments",w:"Limitations en gratuit",r:8.7,g:["Musique","Haute fidélité","Instruments","Studio"],cens:1,dep:["web"],plat:["Web"]},
-{id:63,n:"Whisper",l:"openai.com",d:"Audio / Voix",t:"Audio",desc:"Transcription audio open source OpenAI. Précision en 100+ langues. Local possible.",p:"Gratuit",u:"https://openai.com/research/whisper",s:"Open source, précision, 100+ langues, local",w:"Installation locale requise",r:9.0,g:["Transcription","Open source","100 langues","STT","Local"],cens:3,dep:["local","api"],plat:["Local","API OpenAI","HuggingFace"]},
-{id:64,n:"Adobe Podcast",l:"podcast.adobe.com",d:"Audio / Voix",t:"Audio",desc:"Amélioration audio IA: suppression bruit de fond, qualité studio. Gratuit.",p:"Gratuit",u:"https://podcast.adobe.com",s:"Studio qualité, suppression bruit, gratuit",w:"Fonctionnalités limitées",r:8.5,g:["Adobe","Podcast","Bruit","Gratuit","Voix"],cens:3,dep:["web"],plat:["Web"]},
-{id:65,n:"PlayHT",l:"play.ht",d:"Audio / Voix",t:"Audio",desc:"Synthèse vocale et clonage de voix. Alternative à ElevenLabs.",p:"Freemium",u:"https://play.ht",s:"Voix réalistes, clonage, API, ultra-réaliste",w:"Moins connu qu'ElevenLabs",r:8.6,g:["Voix","Clonage","API","TTS"],cens:2,dep:["web","api"],plat:["Web","API"]},
-{id:66,n:"Aiva",l:"aiva.ai",d:"Audio / Voix",t:"Audio",desc:"Composition musicale IA pour films, jeux vidéo. Orchestrations complètes.",p:"Freemium",u:"https://aiva.ai",s:"Orchestrations, partitions, films, jeux",w:"Moins adapté à la pop",r:8.3,g:["Orchestration","Films","Jeux vidéo","Partitions"],cens:2,dep:["web"],plat:["Web"]},
-{id:67,n:"Otter.ai",l:"otter.ai",d:"Productivité",t:"Audio",desc:"Transcription de réunions en temps réel avec résumés et points d'action.",p:"Freemium",u:"https://otter.ai",s:"Temps réel, résumés auto, Zoom/Teams",w:"Anglais principalement",r:8.5,g:["Réunions","Transcription","Zoom","Teams","Temps réel"],cens:2,dep:["web","app"],plat:["Web","iOS","Android","Zoom","Teams"]},
-{id:68,n:"Fathom",l:"fathom.video",d:"Productivité",t:"Audio",desc:"Résumé de réunions avec action items automatiques. Intégré à Zoom.",p:"Freemium",u:"https://fathom.video",s:"Résumés réunions, action items, Zoom",w:"Zoom principalement",r:8.7,g:["Réunions","Résumés","Zoom","Action items"],cens:2,dep:["web","app"],plat:["Web","iOS","Android","Zoom"]},
-// ── DEV / CODE ──
-{id:69,n:"GitHub Copilot",l:"github.com",d:"Code / Dev",t:"Code",desc:"Assistant code temps réel intégré VSCode/JetBrains. Complétion multi-langages.",p:"Payant",u:"https://github.com/features/copilot",s:"Complétion temps réel, multi-langages, chat",w:"10$/mois",r:9.3,g:["GitHub","VSCode","JetBrains","Complétion","Code"],cens:1,dep:["cloud","api"],plat:["VSCode","JetBrains","GitHub","Neovim","CLI"]},
-{id:70,n:"Cursor",l:"cursor.sh",d:"Code / Dev",t:"Code",desc:"IDE IA natif. Agent comprend et modifie l'ensemble d'un codebase.",p:"Freemium",u:"https://cursor.sh",s:"Agent, contexte repo, refactoring",w:"IDE propriétaire",r:9.1,g:["IDE","Agent","Refactoring","Code","VSCode"],cens:1,dep:["app","cloud"],plat:["macOS","Windows","Linux"]},
-{id:71,n:"Windsurf",l:"codeium.com",d:"Code / Dev",t:"Code",desc:"IDE IA de Codeium avec Cascade. Agent autonome qui construit des apps complètes.",p:"Freemium",u:"https://codeium.com/windsurf",s:"Cascade agent, gratuit généreux, autonome",w:"Récent",r:8.9,g:["Cascade","Codeium","Agent","IDE","Code"],cens:1,dep:["app","cloud"],plat:["macOS","Windows","Linux"]},
-{id:72,n:"v0 by Vercel",l:"v0.dev",d:"Code / Dev",t:"Code",desc:"Génération d'interfaces React/Tailwind depuis une description. Déploiement Vercel.",p:"Freemium",u:"https://v0.dev",s:"UI React/Tailwind instantanée, déploiement Vercel",w:"Front-end uniquement",r:9.1,g:["React","Tailwind","Vercel","UI","Frontend"],cens:1,dep:["web"],plat:["Web"]},
-{id:73,n:"Lovable",l:"lovable.dev",d:"Code / Dev",t:"Code",desc:"Génération d'apps web complètes (front + back) en langage naturel.",p:"Freemium",u:"https://lovable.dev",s:"Full-stack, no-code, déploiement rapide",w:"Personnalisation limitée",r:8.8,g:["Full-stack","No-code","Déploiement","App"],cens:1,dep:["web"],plat:["Web"]},
-{id:74,n:"Bolt.new",l:"bolt.new",d:"Code / Dev",t:"Code",desc:"Génération d'apps StackBlitz. Code et déploiement dans le navigateur.",p:"Freemium",u:"https://bolt.new",s:"Browser-based, StackBlitz, no-code, déploiement",w:"Complexité limitée",r:8.7,g:["StackBlitz","Browser","No-code","App","Déploiement"],cens:1,dep:["web"],plat:["Web"]},
-{id:75,n:"Claude Code",l:"claude.ai",d:"Code / Dev",t:"Code",desc:"CLI Anthropic pour le codage agentique dans le terminal. Git, tests, fichiers.",p:"Payant",u:"https://claude.ai/code",s:"Agentique, terminal, git, tests, fichiers",w:"Payant à l'usage",r:8.9,g:["CLI","Agentique","Terminal","Git","Code"],cens:0,dep:["local","app"],plat:["macOS","Windows","Linux"]},
-{id:76,n:"Hugging Face",l:"huggingface.co",d:"Code / Dev",t:"Code",desc:"La plateforme open source de référence. 500k+ modèles, datasets, Spaces.",p:"Freemium",u:"https://huggingface.co",s:"500k+ modèles, open source, communauté, Spaces",w:"Technique pour non-développeurs",r:9.0,g:["Open source","Modèles","Communauté","500k","Hub"],cens:2,dep:["web","api","cloud","local"],plat:["Web","API","Spaces","Cloud GPU"]},
-{id:77,n:"OpenRouter",l:"openrouter.ai",d:"Code / Dev",t:"Code",desc:"API unifiée pour tous les modèles IA. Accès à des modèles non censurés.",p:"Freemium",u:"https://openrouter.ai",s:"API unifiée, tous modèles, uncensored possible",w:"Pour développeurs",r:8.6,g:["API","Modèles","Économique","Uncensored","Développeurs"],cens:2,dep:["api"],plat:["API REST"]},
-{id:78,n:"Groq",l:"groq.com",d:"Code / Dev",t:"Code",desc:"API d'inférence ultra-rapide grâce aux puces LPU. 10x plus rapide que GPU.",p:"Freemium",u:"https://groq.com",s:"Ultra-rapide, LPU, Llama, Mixtral",w:"Modèles limités",r:8.5,g:["Ultra-rapide","LPU","API","Llama","Vitesse"],cens:2,dep:["api","cloud"],plat:["API REST"]},
-{id:79,n:"Phind",l:"phind.com",d:"Code / Dev",t:"Code",desc:"Moteur de recherche IA spécialisé développeurs. Questions techniques avec code.",p:"Freemium",u:"https://phind.com",s:"Dev spécialisé, code, questions techniques",w:"Pour développeurs uniquement",r:8.3,g:["Dev","Code","Recherche","Technique","Stack"],cens:2,dep:["web"],plat:["Web"]},
-{id:80,n:"Tabnine",l:"tabnine.com",d:"Code / Dev",t:"Code",desc:"Complétion de code IA entraînable sur votre codebase privée. Option on-premise.",p:"Freemium",u:"https://tabnine.com",s:"Données privées, on-premise, sécurité entreprise",w:"Moins puissant que Copilot",r:8.2,g:["Privé","Entreprise","Sécurité","Complétion","On-premise"],cens:1,dep:["cloud","local"],plat:["VSCode","JetBrains","On-premise"]},
-{id:81,n:"Google AI Studio",l:"aistudio.google.com",d:"Code / Dev",t:"Code",desc:"Interface de test Gemini avec accès API gratuit. Idéal pour les développeurs.",p:"Gratuit",u:"https://aistudio.google.com",s:"Gemini API, gratuit, développement, test",w:"Pour développeurs",r:8.5,g:["Gemini","API","Gratuit","Dev","Google"],cens:1,dep:["web","api"],plat:["Web","API"]},
-{id:82,n:"Replicate",l:"replicate.com",d:"Code / Dev",t:"Code",desc:"Déployez des milliers de modèles IA via API en quelques lignes de code.",p:"Freemium",u:"https://replicate.com",s:"Milliers de modèles, API simple, économique",w:"Coût variable",r:8.4,g:["API","Modèles","Cloud","Déploiement","Économique"],cens:2,dep:["api","cloud"],plat:["API REST"]},
-{id:83,n:"Fal.ai",l:"fal.ai",d:"Code / Dev",t:"Code",desc:"Inférence IA ultra-rapide pour images, vidéos et audio. Flux, SD, Kling.",p:"Freemium",u:"https://fal.ai",s:"Ultra-rapide, Flux, SD, images, API",w:"Pour développeurs",r:8.5,g:["API","Images","Ultra-rapide","Flux","Stable Diffusion"],cens:2,dep:["api","cloud"],plat:["API REST"]},
-// ── MARKETING ──
-{id:84,n:"Jasper",l:"jasper.ai",d:"Marketing",t:"Texte",desc:"Rédaction marketing avec Brand Voice. Campagnes, emails et landing pages.",p:"Payant",u:"https://jasper.ai",s:"Brand Voice, templates marketing, équipes",w:"49$/mois minimum",r:8.2,g:["Brand Voice","Campagnes","Équipes","Copywriting"],cens:0,dep:["web"],plat:["Web","Chrome Extension"]},
-{id:85,n:"Surfer SEO",l:"surferseo.com",d:"Marketing",t:"Texte",desc:"Optimisation SEO assistée IA avec analyse SERP et scoring de contenu.",p:"Payant",u:"https://surferseo.com",s:"SEO précis, SERP, scoring, éditeur intégré",w:"Très coûteux",r:8.3,g:["SEO","SERP","Scoring","Contenu","Google"],cens:0,dep:["web"],plat:["Web"]},
-{id:86,n:"Copy.ai",l:"copy.ai",d:"Marketing",t:"Texte",desc:"Générateur de textes marketing avec workflows automatisés.",p:"Freemium",u:"https://copy.ai",s:"Workflows, templates, automatisation contenu",w:"Qualité variable",r:8.0,g:["Workflows","Copywriting","Automatisation","Marketing"],cens:0,dep:["web"],plat:["Web"]},
-{id:87,n:"AdCreative.ai",l:"adcreative.ai",d:"Marketing",t:"Image",desc:"Génération automatique de créatifs publicitaires optimisés pour la conversion.",p:"Payant",u:"https://adcreative.ai",s:"Créatifs pubs, optimisation conversion, banières",w:"Très spécialisé publicité",r:8.0,g:["Publicité","Bannières","Conversion","Ads"],cens:0,dep:["web"],plat:["Web"]},
-{id:88,n:"Taplio",l:"taplio.com",d:"Marketing",t:"Texte",desc:"Outil IA dédié à la croissance LinkedIn. Posts viraux et analytics.",p:"Payant",u:"https://taplio.com",s:"LinkedIn spécialisé, viral, analytics",w:"LinkedIn uniquement",r:8.2,g:["LinkedIn","Viral","Posts","Réseaux sociaux"],cens:0,dep:["web"],plat:["Web","Chrome Extension"]},
-// ── PRODUCTIVITÉ ──
-{id:89,n:"Notion AI",l:"notion.so",d:"Productivité",t:"Texte",desc:"IA intégrée à Notion: résume, rédige, traduit et répond sur vos documents.",p:"Payant",u:"https://notion.so/product/ai",s:"Intégré Notion, résumés, traduction, Q&A",w:"Abonnement requis",r:8.3,g:["Notion","Organisation","Résumé","Traduction","Notes"],cens:1,dep:["web","app"],plat:["Web","iOS","Android","macOS","Windows"]},
-{id:90,n:"Gamma",l:"gamma.app",d:"Productivité",t:"Texte",desc:"Présentations visuelles depuis un prompt en quelques secondes.",p:"Freemium",u:"https://gamma.app",s:"Présentations rapides, beau design, web",w:"Personnalisation limitée",r:8.4,g:["Présentations","Design auto","Rapide","Slides"],cens:1,dep:["web"],plat:["Web"]},
-{id:91,n:"Microsoft Copilot",l:"copilot.microsoft.com",d:"Productivité",t:"Texte",desc:"IA intégrée à Microsoft 365: Word, Excel, PowerPoint, Teams.",p:"Payant",u:"https://copilot.microsoft.com",s:"Office 365, Teams, Excel, Word, PowerPoint",w:"30$/utilisateur/mois",r:8.4,g:["Microsoft","Office","Teams","Excel","Word","PowerPoint"],cens:0,dep:["web","app","cloud"],plat:["Web","Windows","macOS","iOS","Android"]},
-{id:92,n:"Google Workspace AI",l:"workspace.google.com",d:"Productivité",t:"Texte",desc:"IA intégrée à Gmail, Docs, Sheets, Slides et Meet.",p:"Payant",u:"https://workspace.google.com",s:"Gmail, Docs, Sheets, Meet, intégré nativement",w:"Abonnement Workspace requis",r:8.3,g:["Google","Gmail","Docs","Sheets","Meet"],cens:0,dep:["web","app","cloud"],plat:["Web","iOS","Android"]},
-{id:93,n:"Zapier AI",l:"zapier.com",d:"Productivité",t:"Texte",desc:"Agents IA qui automatisent des workflows entre 6000+ applications.",p:"Freemium",u:"https://zapier.com/ai",s:"6000+ apps, automatisation, agents IA",w:"Complexe à paramétrer",r:8.5,g:["Automatisation","Workflows","6000 apps","Agents","No-code"],cens:1,dep:["web","cloud"],plat:["Web"]},
-{id:94,n:"Make",l:"make.com",d:"Productivité",t:"Texte",desc:"Automatisation visuelle no-code avec modules IA. Alternative à Zapier.",p:"Freemium",u:"https://make.com",s:"Visuel, no-code, flexible, IA intégrée",w:"Courbe d'apprentissage",r:8.3,g:["No-code","Visuel","Automatisation","Workflows"],cens:1,dep:["web","cloud"],plat:["Web"]},
-{id:95,n:"Reclaim AI",l:"reclaim.ai",d:"Productivité",t:"Texte",desc:"Planification intelligente de calendrier IA. Optimise l'agenda et protège le focus.",p:"Freemium",u:"https://reclaim.ai",s:"Calendrier IA, planification auto, focus time",w:"Google Calendar uniquement",r:8.2,g:["Calendrier","Planification","Focus","Agenda"],cens:1,dep:["web","app"],plat:["Web","Chrome"]},
-{id:96,n:"Netram",l:"netram.ai",d:"Productivité",t:"Texte",desc:"L'IA gère votre boîte mail. Vous gérez les exceptions.",p:"Freemium",u:"https://netram.ai",s:"Email IA, gestion inbox, automatisation",w:"Accès limité",r:7.9,g:["Email","Inbox","Automatisation","Gmail"],cens:1,dep:["web","app"],plat:["Web","Gmail"]},
-// ── AGENTS ──
-{id:97,n:"n8n AI",l:"n8n.io",d:"Agents IA",t:"Texte",desc:"Automatisation open source avec agents IA. Auto-hébergeable.",p:"Freemium",u:"https://n8n.io",s:"Open source, self-hosted, agents IA, flexible",w:"Technique à configurer",r:8.4,g:["Open source","Self-hosted","Agents","Automatisation"],cens:3,dep:["local","cloud","web"],plat:["Self-hosted","Cloud"]},
-{id:98,n:"CrewAI",l:"crewai.com",d:"Agents IA",t:"Texte",desc:"Framework Python pour des équipes d'agents IA collaboratifs avec rôles.",p:"Gratuit",u:"https://crewai.com",s:"Multi-agents, rôles, orchestration, Python",w:"Nécessite Python",r:8.2,g:["Multi-agents","Python","Framework","Orchestration"],cens:3,dep:["local","cloud"],plat:["Python","Docker","API"]},
-{id:99,n:"Manus AI",l:"manus.im",d:"Agents IA",t:"Texte",desc:"Agent IA général. Exécute des tâches complexes de façon autonome.",p:"Payant",u:"https://manus.im",s:"Agentique général, tâches complexes, autonome",w:"Accès restreint",r:8.4,g:["Agent général","Autonome","Tâches","Butterfly Effect"],cens:1,dep:["web"],plat:["Web"]},
-{id:100,n:"Lindy AI",l:"lindy.ai",d:"Agents IA",t:"Texte",desc:"Agents IA no-code qui automatisent email, calendrier, CRM.",p:"Freemium",u:"https://lindy.ai",s:"No-code, email, CRM, calendrier, agents",w:"Récent",r:8.3,g:["No-code","Email","CRM","Calendrier","Agents"],cens:1,dep:["web"],plat:["Web"]},
-{id:101,n:"Moon IA",l:"moon-ia.fr",d:"Agents IA",t:"Texte",desc:"Plus de 70 modèles d'IA dans une interface sécurisée et hébergée en France.",p:"Freemium",u:"https://moon-ia.fr",s:"70+ modèles, France, RGPD, sécurisé",w:"Moins connu",r:7.8,g:["France","RGPD","Multi-modèles","70+ modèles"],cens:2,dep:["web"],plat:["Web"]},
-// ── FINANCES ──
-{id:102,n:"Bloomberg GPT",l:"bloomberg.com",d:"Finances",t:"Texte",desc:"IA de Bloomberg spécialisée en finance. Entraînée sur des données financières exclusives.",p:"Payant",u:"https://bloomberg.com",s:"Finance, données exclusives, précis",w:"Réservé aux abonnés Bloomberg",r:8.5,g:["Finance","Bloomberg","Données","Marchés"],cens:0,dep:["web"],plat:["Bloomberg Terminal"]},
-{id:103,n:"Julius AI",l:"julius.ai",d:"Finances",t:"Texte",desc:"Analysez des données et créez des graphiques depuis CSV/Excel.",p:"Freemium",u:"https://julius.ai",s:"CSV/Excel, graphiques auto, insights, data",w:"Données sensibles",r:8.3,g:["Data","CSV","Excel","Graphiques","Analyse"],cens:2,dep:["web"],plat:["Web"]},
-{id:104,n:"Moni IA",l:"moni-ia.com",d:"Finances",t:"Texte",desc:"Assistant IA qui analyse vos dépenses et donne des retours personnalisés.",p:"Freemium",u:"https://moni-ia.com",s:"Dépenses, analyse, budget, personnel",w:"Niche",r:7.6,g:["Finance","Dépenses","Budget","Personnel"],cens:1,dep:["web","app"],plat:["Web","iOS","Android"]},
-// ── RECRUTEMENT ──
-{id:105,n:"HireVue",l:"hirevue.com",d:"Recrutement",t:"Texte",desc:"Plateforme IA d'entretiens vidéo et d'évaluation des candidats.",p:"Payant",u:"https://hirevue.com",s:"Entretiens vidéo IA, évaluation, efficacité",w:"Controversé sur les biais IA",r:7.8,g:["Recrutement","Entretiens","RH","Vidéo"],cens:0,dep:["web"],plat:["Web"]},
-{id:106,n:"Kickresume AI",l:"kickresume.com",d:"Recrutement",t:"Texte",desc:"Création de CV et lettres de motivation par IA. Suggestions par secteur.",p:"Freemium",u:"https://kickresume.com",s:"CV IA, lettres de motivation, templates",w:"Version gratuite limitée",r:8.0,g:["CV","Lettre de motivation","Recrutement","Emploi"],cens:1,dep:["web"],plat:["Web"]},
-{id:107,n:"Rezi AI",l:"rezi.ai",d:"Recrutement",t:"Texte",desc:"Optimisation de CV pour les ATS (systèmes de suivi des candidatures) par IA.",p:"Freemium",u:"https://rezi.ai",s:"ATS, CV optimisé, scoring, recrutement",w:"Anglais principalement",r:8.1,g:["ATS","CV","Recrutement","Emploi","Scoring"],cens:1,dep:["web"],plat:["Web"]},
-// ── E-COMMERCE ──
-{id:108,n:"Shopify AI",l:"shopify.com",d:"E-commerce",t:"Texte",desc:"IA intégrée à Shopify. Génère descriptions produits, réponses clients, analytics.",p:"Payant",u:"https://shopify.com",s:"Descriptions produits, analytics, client IA",w:"Réservé aux clients Shopify",r:8.3,g:["E-commerce","Shopify","Produits","Analytics"],cens:0,dep:["web","app"],plat:["Web","iOS","Android"]},
-{id:109,n:"Tidio AI",l:"tidio.com",d:"E-commerce",t:"Texte",desc:"Chatbot IA pour e-commerce. Répond aux clients 24/7, réduit les abandons de panier.",p:"Freemium",u:"https://tidio.com",s:"Chatbot e-commerce, 24/7, réduction abandon",w:"Configurations avancées payantes",r:8.1,g:["E-commerce","Chatbot","24/7","Abandon panier"],cens:0,dep:["web"],plat:["Web"]},
-// ── ÉDUCATION ──
-{id:110,n:"Khanmigo",l:"khanacademy.org",d:"Éducation",t:"Texte",desc:"Tuteur IA Khan Academy. Guide les élèves par questions socratiques.",p:"Payant",u:"https://khanacademy.org/khanmigo",s:"Pédagogique, socratique, éthique, équitable",w:"Payant, anglais principalement",r:8.5,g:["Éducation","Socratique","Tuteur","Khan Academy"],cens:0,dep:["web"],plat:["Web"]},
-{id:111,n:"Duolingo Max",l:"duolingo.com",d:"Éducation",t:"Texte",desc:"Apprentissage des langues avec IA GPT-4. Simule des conversations réelles.",p:"Payant",u:"https://duolingo.com",s:"Langues, conversations IA, explications GPT",w:"Abonnement Max requis",r:8.4,g:["Langues","Conversation","GPT-4","Apprentissage"],cens:0,dep:["app"],plat:["iOS","Android"]},
-{id:112,n:"NotebookLM",l:"notebooklm.google",d:"Éducation",t:"Texte",desc:"Analysez vos documents avec IA Google. Génère des podcasts audio de vos sources.",p:"Gratuit",u:"https://notebooklm.google",s:"Documents perso, podcast audio, gratuit",w:"Limité à vos documents",r:8.7,g:["Google","Documents","Podcast audio","Gratuit","Analyse"],cens:1,dep:["web"],plat:["Web"]},
-// ── JURIDIQUE ──
-{id:113,n:"Harvey AI",l:"harvey.ai",d:"Juridique",t:"Texte",desc:"IA pour cabinets d'avocats. Rédige contrats, analyse documents juridiques complexes.",p:"Payant",u:"https://harvey.ai",s:"Juridique, contrats, analyse, avocats",w:"Accès restreint",r:8.5,g:["Juridique","Contrats","Avocats","Loi","Droit"],cens:0,dep:["web"],plat:["Web"]},
-{id:114,n:"Ironclad AI",l:"ironcladapp.com",d:"Juridique",t:"Texte",desc:"Gestion de contrats IA. Analyse, négocie et automatise les workflows contractuels.",p:"Payant",u:"https://ironcladapp.com",s:"Contrats, négociation, CLM, workflows",w:"Entreprises uniquement",r:8.2,g:["Contrats","CLM","Entreprise","Négociation"],cens:0,dep:["web"],plat:["Web"]},
-// ── SANTÉ ──
-{id:115,n:"Ada Health",l:"ada.com",d:"Santé & Bien-être",t:"Texte",desc:"Checklist médicale IA pour l'évaluation des symptômes. 11M+ patients.",p:"Gratuit",u:"https://ada.com",s:"Symptômes, médical, 11M+ utilisateurs, gratuit",w:"Ne remplace pas un médecin",r:8.2,g:["Médical","Symptômes","Santé","Gratuit"],cens:0,dep:["web","app"],plat:["Web","iOS","Android"]},
-{id:116,n:"Woebot",l:"woebothealth.com",d:"Santé & Bien-être",t:"Texte",desc:"Chatbot IA de santé mentale basé sur la thérapie cognitivo-comportementale.",p:"Gratuit",u:"https://woebothealth.com",s:"Santé mentale, TCC, disponible 24/7",w:"Pas un thérapeute",r:7.8,g:["Santé mentale","TCC","Bien-être","24/7","Gratuit"],cens:0,dep:["web","app"],plat:["Web","iOS","Android"]},
-// ── VENTES ──
-{id:117,n:"HubSpot AI",l:"hubspot.com",d:"Ventes",t:"Texte",desc:"IA dans HubSpot CRM: emails, résumés appels, score leads automatique.",p:"Freemium",u:"https://hubspot.com",s:"CRM, emails IA, score leads, résumés",w:"Fonctions avancées payantes",r:8.3,g:["HubSpot","CRM","Emails","Leads","Ventes"],cens:1,dep:["web","app"],plat:["Web","iOS","Android"]},
-{id:118,n:"Salesforce Einstein",l:"salesforce.com",d:"Ventes",t:"Texte",desc:"IA intégrée à Salesforce CRM. Prédictions de ventes et recommandations.",p:"Payant",u:"https://salesforce.com/products/einstein",s:"CRM IA, prédictions, recommandations, Salesforce",w:"Réservé aux clients Salesforce",r:8.4,g:["Salesforce","CRM","Prédictions","Ventes"],cens:0,dep:["web","app","cloud"],plat:["Web","iOS","Android"]},
-// ── SERVICE CLIENT ──
-{id:119,n:"Intercom AI",l:"intercom.com",d:"Service client",t:"Texte",desc:"Fin AI d'Intercom. Résout automatiquement les questions clients.",p:"Payant",u:"https://intercom.com",s:"Résolution auto, omnicanal, CRM intégré",w:"Très coûteux",r:8.5,g:["Service client","Chatbot","CRM","Support"],cens:0,dep:["web","api"],plat:["Web","API"]},
-// ── DESIGN ──
-{id:120,n:"Figma AI",l:"figma.com",d:"Design",t:"Image",desc:"IA dans Figma pour création de composants, suggestions et prototypage.",p:"Payant",u:"https://figma.com",s:"Design pro, composants, prototypage, collaboration",w:"Abonnement Figma requis",r:8.5,g:["Figma","Design pro","Prototypage","UI","Collaboration"],cens:0,dep:["web","app"],plat:["Web","macOS","Windows"]},
-{id:121,n:"Framer AI",l:"framer.com",d:"Design",t:"Image",desc:"Création de sites web animés depuis un prompt texte. Publiez en secondes.",p:"Freemium",u:"https://framer.com/ai",s:"Sites web instantanés, animations, design premium",w:"Personnalisation avancée complexe",r:8.6,g:["Sites web","Animations","Design","No-code"],cens:1,dep:["web"],plat:["Web"]},
-{id:122,n:"Webflow AI",l:"webflow.com",d:"Design",t:"Image",desc:"Sites web no-code avec assistance IA pour layout, contenu et SEO.",p:"Freemium",u:"https://webflow.com",s:"No-code puissant, SEO, responsive, pro",w:"Courbe d'apprentissage",r:8.4,g:["No-code","SEO","Responsive","Sites web"],cens:1,dep:["web"],plat:["Web"]},
-{id:123,n:"Recraft",l:"recraft.ai",d:"Design",t:"Image",desc:"Génération d'images design avec contrôle précis des styles, icônes vectorielles.",p:"Freemium",u:"https://recraft.ai",s:"Design pro, vectoriel, icônes, contrôle style",w:"Moins adapté à l'art libre",r:8.5,g:["Vectoriel","Pro","Icônes","Design","Style"],cens:1,dep:["web","api"],plat:["Web","API"]},
-// ── TRADUCTION ──
-{id:124,n:"DeepL",l:"deepl.com",d:"Traduction",t:"Texte",desc:"Meilleure qualité de traduction. 31 langues, ton naturel et idiomatique.",p:"Freemium",u:"https://deepl.com",s:"Meilleure qualité, naturel, 31 langues, fiable",w:"Uniquement traduction",r:9.1,g:["Traduction","Qualité","31 langues","Naturel","Idiomatique"],cens:2,dep:["web","app","api"],plat:["Web","iOS","Android","API","Desktop"]},
-// ── RÉSEAUX SOCIAUX ──
-{id:125,n:"Hootsuite AI",l:"hootsuite.com",d:"Réseaux sociaux",t:"Texte",desc:"Gestion des réseaux sociaux avec IA pour création de contenu et analyse.",p:"Payant",u:"https://hootsuite.com",s:"Multi-réseaux, analytics, génération contenu",w:"Cher",r:8.1,g:["Social media","Analytics","Multi-réseaux","Instagram","Facebook"],cens:1,dep:["web","app"],plat:["Web","iOS","Android"]},
-{id:126,n:"Buffer AI",l:"buffer.com",d:"Réseaux sociaux",t:"Texte",desc:"Génération et programmation de posts pour réseaux sociaux.",p:"Freemium",u:"https://buffer.com",s:"Posts IA, programmation, multi-réseaux, simple",w:"IA basique",r:7.9,g:["Social media","Programmation","Posts","Multi-réseaux"],cens:1,dep:["web","app"],plat:["Web","iOS","Android"]},
-// ── SEO ──
-{id:127,n:"Semrush AI",l:"semrush.com",d:"SEO / Visibilité",t:"Texte",desc:"La suite SEO la plus complète avec IA intégrée pour l'analyse et la stratégie.",p:"Payant",u:"https://semrush.com",s:"SEO complet, concurrents, mots-clés, backlinks",w:"Très coûteux",r:8.6,g:["SEO","Concurrents","Mots-clés","Backlinks","Analytics"],cens:0,dep:["web"],plat:["Web"]},
-// ── SÉCURITÉ ──
-{id:128,n:"Darktrace",l:"darktrace.com",d:"Sécurité",t:"Texte",desc:"Détection de menaces et réponse autonome aux cyberattaques.",p:"Payant",u:"https://darktrace.com",s:"Détection menaces, autonome, entreprise, cyber",w:"Très coûteux",r:8.6,g:["Cybersécurité","Menaces","Entreprise","Cyber","Détection"],cens:0,dep:["cloud"],plat:["Cloud","Enterprise"]},
-// ── JEUX ──
-{id:129,n:"Inworld AI",l:"inworld.ai",d:"Jeux",t:"Texte",desc:"IA pour créer des personnages de jeux vidéo avec dialogues dynamiques.",p:"Freemium",u:"https://inworld.ai",s:"Personnages NPC, dialogues dynamiques, jeux",w:"Spécialisé jeux uniquement",r:8.3,g:["Jeux vidéo","NPC","Personnages","Dialogues","GameDev"],cens:1,dep:["api","cloud"],plat:["API","Unity","Unreal"]},
-{id:130,n:"Ludo AI",l:"ludo.ai",d:"Jeux",t:"Texte",desc:"Outil IA pour les game designers. Génère des concepts de jeux et des assets.",p:"Freemium",u:"https://ludo.ai",s:"Game design, concepts, assets, créativité",w:"Niche game design",r:7.9,g:["Game design","Concepts","Assets","GameDev"],cens:1,dep:["web"],plat:["Web"]},
-// ── VOYAGE ──
-{id:131,n:"Layla",l:"justasklayla.com",d:"Voyage & Tourisme",t:"Texte",desc:"IA spécialisée dans la planification de voyages. Itinéraires personnalisés.",p:"Gratuit",u:"https://justasklayla.com",s:"Voyage, itinéraires, hôtels, personnalisé",w:"Données pas toujours à jour",r:7.9,g:["Voyage","Itinéraires","Tourisme","Hôtels"],cens:1,dep:["web","app"],plat:["Web","iOS","Android"]},
-{id:132,n:"Roam Around",l:"roamaround.io",d:"Voyage & Tourisme",t:"Texte",desc:"Planificateur de voyage IA. Génère des itinéraires détaillés en quelques secondes.",p:"Gratuit",u:"https://roamaround.io",s:"Itinéraires rapides, destinations, gratuit",w:"Moins personnalisé",r:7.7,g:["Voyage","Itinéraires","Gratuit","Rapide"],cens:1,dep:["web"],plat:["Web"]},
-// ── MODE & BEAUTÉ ──
-{id:133,n:"YesPlz AI",l:"yesplz.ai",d:"Mode & Beauté",t:"Image",desc:"IA de recommandation mode. Analyse vos préférences et suggère des tenues.",p:"Freemium",u:"https://yesplz.ai",s:"Mode, recommandations, style, personnalisé",w:"Niche mode",r:7.8,g:["Mode","Style","Recommandations","Fashion"],cens:1,dep:["web","api"],plat:["Web","API"]},
-// ── SPIRITUALITÉ ──
-{id:134,n:"Chai",l:"chai.ml",d:"Spiritualité",t:"Texte",desc:"Plateforme de conversation avec des IA spécialisées pour bien-être et spiritualité.",p:"Freemium",u:"https://chai.ml",s:"Bien-être, spiritualité, conversations, personnages",w:"Peu de garde-fous",r:7.5,g:["Bien-être","Spiritualité","Conversations","Personnages"],cens:2,dep:["app"],plat:["iOS","Android"]},
-// ── RECHERCHE ──
-{id:135,n:"Elicit",l:"elicit.com",d:"Recherche",t:"Texte",desc:"Recherche académique IA. Synthétise des milliers de papers scientifiques.",p:"Freemium",u:"https://elicit.com",s:"Académique, papers, synthèse, citations",w:"Articles académiques seulement",r:8.6,g:["Académique","Papers","Science","Synthèse","Recherche"],cens:1,dep:["web"],plat:["Web"]},
-{id:136,n:"Consensus",l:"consensus.app",d:"Recherche",t:"Texte",desc:"Moteur de recherche scientifique IA. Extrait des conclusions des études peer-reviewed.",p:"Freemium",u:"https://consensus.app",s:"Peer-reviewed, conclusions directes, fiable",w:"Anglais uniquement",r:8.4,g:["Peer-reviewed","Science","Conclusions","Études"],cens:1,dep:["web"],plat:["Web"]},
-{id:137,n:"ChatPDF",l:"chatpdf.com",d:"Recherche",t:"Texte",desc:"Conversez avec n'importe quel PDF. Questions, résumés et citations directes.",p:"Freemium",u:"https://chatpdf.com",s:"Chat avec PDF, citations, résumés, docs",w:"Limité aux PDFs",r:8.0,g:["PDF","Citations","Résumé","Documents"],cens:2,dep:["web"],plat:["Web"]},
-// ── 3D ──
-{id:138,n:"Meshy",l:"meshy.ai",d:"Design",t:"Image",desc:"Génération de modèles 3D depuis image ou texte. Export FBX, OBJ, glTF.",p:"Freemium",u:"https://meshy.ai",s:"3D depuis image/texte, multi-format, textures",w:"Qualité variable",r:8.3,g:["3D","FBX","Textures","Modèles","Jeux vidéo"],cens:2,dep:["web","api"],plat:["Web","API"]},
-{id:139,n:"Spline AI",l:"spline.design",d:"Design",t:"Image",desc:"Design et animation 3D interactif dans le navigateur avec génération IA.",p:"Freemium",u:"https://spline.design",s:"3D browser, interactif, animations, web",w:"Rendu moins professionnel",r:8.2,g:["3D","Browser","Interactif","Animations","Web"],cens:2,dep:["web"],plat:["Web"]},
-// ── COMPAGNONS ──
-{id:140,n:"Replika",l:"replika.ai",d:"Compagnons IA",t:"Texte",desc:"Compagnon IA pour le soutien émotionnel et les conversations personnelles.",p:"Freemium",u:"https://replika.ai",s:"Soutien émotionnel, personnalisation, adaptatif",w:"Non adapté à l'usage pro",r:7.5,g:["Émotionnel","Compagnon","Mobile","Bien-être"],cens:2,dep:["app"],plat:["iOS","Android"]},
-{id:141,n:"Anima AI",l:"myanima.ai",d:"Compagnons IA",t:"Texte",desc:"Compagnon IA pour améliorer les compétences sociales et le bien-être.",p:"Freemium",u:"https://myanima.ai",s:"Compagnon, compétences sociales, bien-être",w:"Niche",r:7.4,g:["Compagnon","Social","Bien-être","Mobile"],cens:2,dep:["app"],plat:["iOS","Android"]},
 ];
 
 // ==================== UI ====================
